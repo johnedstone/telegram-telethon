@@ -6,5 +6,6 @@ name = "pypi"
 [packages]
 Telethon = "*"
 requests = "*"
+python-dotenv = "*"
 
 [dev-packages]

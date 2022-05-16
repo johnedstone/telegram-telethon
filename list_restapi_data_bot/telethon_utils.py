@@ -3,6 +3,11 @@ import json
 import os
 import sys
 
+from dotenv import load_dotenv
+
+env_file = os.getenv('LIST_UPTIMES_ENV', '.env')
+load_dotenv(env_file)
+
 from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 
