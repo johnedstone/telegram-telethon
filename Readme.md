@@ -14,7 +14,7 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
 
 ### Related Readme's
 * Readme_initial_setup.md
-* Readme_ansible_commands.md 
+* [Ansible Readme.md](https://github.com/johnedstone/telegram-telethon/tree/main/ansible_playbook)
 
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
