@@ -1,4 +1,4 @@
-### Ansible Commands
+### Typical ansible commands
 ```
 #dry-run
 /usr/local/bin/ansible-playbook --check --diff --flush-cache -i inventory.ini playbook.yaml
