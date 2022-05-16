@@ -1,0 +1,13 @@
+---
+- hosts: nginx_hosts
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    HOME: "{{ lookup('env', 'HOME') }}"
+  vars_files:
+    - /opt/bitnami/apps/configuration/private_vars.yaml
+  connection: local
+  roles:
+    - role: optional_prep_work
+      tags: [optional_prep_work]
+
+# vim: ai et ts=2 sw=2 sts=2 nu
