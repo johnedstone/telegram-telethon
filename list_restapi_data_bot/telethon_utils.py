@@ -2,6 +2,7 @@ import logging
 import json
 import os
 import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -40,5 +41,37 @@ def start_bot(prod=True):
         '''.format(e))
 
     return bot, rest_api, json.loads(params)
+
+
+def get_loggers_for_systemd():
+    """Use to capture log files when usting systemd"""
+
+    loggers = (None, None)
+
+    log_path =os.getenv('LIST_UPTIMES_LOG')
+    error_path = os.getenv('LIST_UPTIMES_ERROR')
+
+    if Path(log_path).is_file() and Path(error_path).is_file():
+        formatter = logging.Formatter(fmt="%(asctime)s [%(levelname)s]: %(message)s")
+
+        handler_log_file = logging.FileHandler(log_path)
+        handler_error_file = logging.FileHandler(error_path)
+
+        handler_log_file.setFormatter(formatter)
+        handler_error_file.setFormatter(formatter)
+
+        logger_log_file = logging.getLogger('logs')
+        logger_error_file = logging.getLogger('errors')
+
+        logger_log_file.setLevel(logging.INFO)
+        logger_error_file.setLevel(logging.WARNING)
+
+        logger_log_file.addHandler(handler_log_file)
+        logger_error_file.addHandler(handler_error_file)
+
+        loggers = (logger_log_file, logger_error_file)
+
+
+    return loggers
 
 # vim: ai et ts=4 sw=4 sts=4 nu
