@@ -8,10 +8,10 @@ import re
 import requests
 
 from telethon import events, Button
-from telethon_utils import start_logging, start_bot
+from telethon_utils import start_bot
+from telethon_utils import logger_log
+from telethon_utils import logger_error
 
-
-logger = start_logging(logging_level=logging.WARNING)
 bot, rest_api, params = start_bot()
 bot.parse_mode = 'md'
 
@@ -54,14 +54,14 @@ def get_uptime_report():
     results = format_dict(results)
     results = results + f"""**Currently:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}"""
 
-    logger.info(results)
+    logger_log.info(results)
     return f'{results}'
 
 
 @bot.on(events.CallbackQuery(data=re.compile(r'5')))
 async def handler(event):
-    logger.info('{}'.format(dir(event)))
-    logger.info('{}'.format(event.stringify()))
+    logger_log.info('{}'.format(dir(event)))
+    logger_log.info('{}'.format(event.stringify()))
     await event.respond('__Coming soon!__')
     ## sometime try:
     ## await event.respond('__Coming soon!__', parse_mode='md')
@@ -69,8 +69,8 @@ async def handler(event):
 
 @bot.on(events.CallbackQuery(data=re.compile(r'6')))
 async def handler(event):
-    logger.info('{}'.format(dir(event)))
-    logger.info('{}'.format(event.stringify()))
+    logger_log.info('{}'.format(dir(event)))
+    logger_log.info('{}'.format(event.stringify()))
     await event.respond(get_uptime_report())
     await event.respond('Choose an option', buttons=keyboard)
 
