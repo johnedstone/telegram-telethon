@@ -8,9 +8,9 @@ import re
 import requests
 
 from telethon import events, Button
-from telethon_utils import start_bot
-from telethon_utils import logger_log
-from telethon_utils import logger_error
+from utils.telethon_utils import start_bot
+from utils.telethon_utils import logger_log
+from utils.telethon_utils import logger_error
 
 bot, rest_api, params = start_bot()
 bot.parse_mode = 'md'
