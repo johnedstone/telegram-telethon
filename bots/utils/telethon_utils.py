@@ -63,6 +63,7 @@ def start_bot(prod=True):
         '''.format(e))
         sys.exit()
 
+    logger_log.info('bot has started')
     return bot, rest_api, json.loads(params)
 
 
