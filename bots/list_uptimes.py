@@ -8,12 +8,11 @@ import re
 import requests
 
 from telethon import events, Button
-from utils.telethon_utils import start_bot
-from utils.telethon_utils import logger_log
-from utils.telethon_utils import logger_error
+from utils.telethon_utils import start_bot, get_logger
+
+logger_log, logger_error = get_logger(__name__, logging_level=logging.WARNING)
 
 bot, rest_api, params = start_bot()
-bot.parse_mode = 'md'
 
 p = re.compile(r'Start time .unixtime . utc_datetime.: \d+ .')
 pz = re.compile(r'(.\d{6}Z|.\d{6}\+00:00)$')
@@ -62,10 +61,7 @@ def get_uptime_report():
 async def handler(event):
     logger_log.info('{}'.format(dir(event)))
     logger_log.info('{}'.format(event.stringify()))
-    await event.respond('__Coming soon!__')
-    ## sometime try:
-    ## await event.respond('__Coming soon!__', parse_mode='md')
-    ## and remove bot.parse_mode above
+    await event.respond('__Coming soon!__', parse_mode='md')
 
 @bot.on(events.CallbackQuery(data=re.compile(r'6')))
 async def handler(event):
