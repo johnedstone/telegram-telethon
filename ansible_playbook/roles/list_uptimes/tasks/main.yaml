@@ -1,0 +1,15 @@
+---
+- name: Create directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    owner: bitnami
+    group: bitnami
+    mode: 0775
+    state: directory
+  loop:
+    - "/var/log/{{ app_name }}"
+    - "/opt/bitnami/apps/{{ app_name }}"
+
+
+# vim: ai et ts=2 sw=2 sts=2 nu
