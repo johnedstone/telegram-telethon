@@ -1,6 +1,6 @@
 ### Running the bots
 * The bot can be temporarily run by the following commands.  Otherwise,
-use the ansible playbook to run by systemd
+use the ansible playbook to install and run by systemd
 ```
 cd bots/
 pipenv shell
