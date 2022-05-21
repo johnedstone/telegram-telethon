@@ -9,16 +9,23 @@ from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 
 
-env_file = os.getenv('LIST_UPTIMES_ENV', '.env')
+env_file = os.getenv('PATH_TO_ENV_FILE', '.env')
 load_dotenv(env_file)
-
-log_to_file = os.getenv('LOG_TO_FILE') == 'yes'
-
-log_path =os.getenv('LIST_UPTIMES_LOG', '')
-error_path = os.getenv('LIST_UPTIMES_ERROR', '')
 
 def get_logger(logger_name, logging_level=logging.INFO,
         logging_error_level=logging.WARNING):
+
+    if logger_name == 'list_uptimes':
+        log_path =os.getenv('LIST_UPTIMES_LOG', '')
+        error_path = os.getenv('LIST_UPTIMES_ERROR', '')
+        log_to_file = os.getenv('LIST_UPTIMES_LOG_TO_FILE') == 'yes'
+
+    elif logger_name == 'location':
+        log_path = os.getenv('LOCATON_LOG', '')
+        error_path = os.getenv('LOCATION_ERROR', '')
+        log_to_file = os.getenv('LOCATION_LOG_TO_FILE') == 'yes'
+    else:
+        log_to_file = None
 
     logger_log = logging.getLogger(logger_name)
     logger_error = logging.getLogger(logger_name + '_errors')
@@ -29,10 +36,14 @@ def get_logger(logger_name, logging_level=logging.INFO,
 
     formatter = logging.Formatter(fmt="%(asctime)s %(name)s:%(lineno)d [%(levelname)s]: %(message)s")
     
-    if log_to_file and Path(log_path).is_file() and Path(error_path).is_file():
-        handler_log = logging.FileHandler(log_path)
-        handler_error = logging.FileHandler(error_path)
-    
+    if log_to_file:
+        if Path(log_path).is_file() and Path(error_path).is_file():
+            handler_log = logging.FileHandler(log_path)
+            handler_error = logging.FileHandler(error_path)
+        else:
+            sys.exit("""
+            Yikes! log files are missing
+            """)
     else:
         handler_log = logging.StreamHandler(stream=sys.stdout)
         handler_error = logging.StreamHandler(stream=sys.stderr)
@@ -49,10 +60,8 @@ def get_logger(logger_name, logging_level=logging.INFO,
  
     return logger_log, logger_error
 
-def start_bot(prod=True):
-    logger_log, logger_error = get_logger(__name__)
-
-    bot_token = os.getenv('TOKEN_LIST_UPTIMES_BOT')
+def start_bot(token_name, logger_log, logger_error):
+    bot_token = os.getenv(token_name)
     api_id = os.getenv('API_ID')
     api_hash = os.getenv('API_HASH')
     rest_api = os.getenv('REST_API')

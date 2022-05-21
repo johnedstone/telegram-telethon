@@ -10,9 +10,9 @@ import requests
 from telethon import events, Button
 from utils.telethon_utils import start_bot, get_logger
 
-logger_log, logger_error = get_logger(__name__, logging_level=logging.WARNING)
+logger_log, logger_error = get_logger('list_uptimes', logging_level=logging.INFO)
 
-bot, rest_api, params = start_bot()
+bot, rest_api, params = start_bot('TOKEN_LIST_UPTIMES_BOT', logger_log, logger_error)
 
 p = re.compile(r'Start time .unixtime . utc_datetime.: \d+ .')
 pz = re.compile(r'(.\d{6}Z|.\d{6}\+00:00)$')
@@ -53,20 +53,20 @@ def get_uptime_report():
     results = format_dict(results)
     results = results + f"""**Currently:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}"""
 
-    logger_log.info(results)
+    logger_log.debug(results)
     return f'{results}'
 
 
 @bot.on(events.CallbackQuery(data=re.compile(r'5')))
 async def handler(event):
-    logger_log.info('{}'.format(dir(event)))
-    logger_log.info('{}'.format(event.stringify()))
+    logger_log.debug('{}'.format(dir(event)))
+    logger_log.debug('{}'.format(event.stringify()))
     await event.respond('__Coming soon!__', parse_mode='md')
 
 @bot.on(events.CallbackQuery(data=re.compile(r'6')))
 async def handler(event):
-    logger_log.info('{}'.format(dir(event)))
-    logger_log.info('{}'.format(event.stringify()))
+    logger_log.debug('{}'.format(dir(event)))
+    logger_log.debug('{}'.format(event.stringify()))
     await event.respond(get_uptime_report())
     await event.respond('Choose an option', buttons=keyboard)
 
