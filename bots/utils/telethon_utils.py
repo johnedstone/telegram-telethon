@@ -9,7 +9,7 @@ from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 
 
-env_file = os.getenv('PATH_TO_ENV_FILE', '.env')
+env_file = os.getenv('PATH_TO_ENV_FILE')
 load_dotenv(env_file)
 
 def get_logger(logging_level=logging.INFO,

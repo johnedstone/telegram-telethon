@@ -1,0 +1,16 @@
+[Unit]
+Description={{ app_name }} daemon
+After=network.target
+
+[Service]
+Type=simple
+User=bitnami
+Group=bitnami
+Restart=always
+
+ExecStart={{ PATH_TO_PYTHON }} /opt/bitnami/apps/{{ app_name }}/{{ LIVE_APP_SCRIPT }}
+
+[Install]
+WantedBy=multi-user.target
+
+# vim: ai et ts=4 sw=4 sts=4 nu

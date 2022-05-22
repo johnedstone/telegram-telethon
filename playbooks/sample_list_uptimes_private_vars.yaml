@@ -6,7 +6,10 @@ local_timezone: 'America/New_York'
 app_name: 'app_name'
 python_version: 'python3.7'
 
+PATH_TO_PYTHON: '/path/to/venv/bin/python'
+LIVE_APP_SCRIPT: 'list_uptimes.py'
 
+PATH_TO_ENV_FILE: '/path/to/.env/file'
 TOKEN_LIST_UPTIMES_BOT: 'token_for_list_uptimes_bot'
 API_ID: 'api_ID'
 API_HASH: 'api_hash'
