@@ -12,9 +12,10 @@ from telethon.sessions import StringSession
 env_file = os.getenv('PATH_TO_ENV_FILE', '.env')
 load_dotenv(env_file)
 
-def get_logger(logger_name, logging_level=logging.INFO,
+def get_logger(logging_level=logging.INFO,
         logging_error_level=logging.WARNING):
 
+    logger_name = os.getenv('APP_NAME')
     logger_log = logging.getLogger(logger_name)
     logger_error = logging.getLogger(logger_name + '_errors')
 

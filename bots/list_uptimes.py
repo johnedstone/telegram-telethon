@@ -10,7 +10,7 @@ import requests
 from telethon import events, Button
 from utils.telethon_utils import start_bot, get_logger
 
-logger_log, logger_error = get_logger('list_uptimes', logging_level=logging.INFO)
+logger_log, logger_error = get_logger(logging_level=logging.INFO)
 
 bot, rest_api, params = start_bot('TOKEN_LIST_UPTIMES_BOT', logger_log, logger_error)
 

@@ -10,9 +10,10 @@ python list_uptimes.py
 
 * Samaple env variables file for list_uptimes bot
 ```
-TOKEN_LIST_UPTIMES_BOT='unique-bot-token'
-API_ID='app-id'
-API_HASH='app-hash'
+TOKEN_LIST_UPTIMES_BOT='your-unique-bot-token'
+APP_NAME='list_uptimes'
+API_ID='your-app-id'
+API_HASH='your-app-hash'
 REST_API='https://rest.api/enpoint'
 PARAMS='{"ordering": "-created_at"}'
 
