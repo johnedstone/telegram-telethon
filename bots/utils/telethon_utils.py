@@ -15,34 +15,27 @@ load_dotenv(env_file)
 def get_logger(logger_name, logging_level=logging.INFO,
         logging_error_level=logging.WARNING):
 
-    if logger_name == 'list_uptimes':
-        log_path =os.getenv('LIST_UPTIMES_LOG', '')
-        error_path = os.getenv('LIST_UPTIMES_ERROR', '')
-        log_to_file = os.getenv('LIST_UPTIMES_LOG_TO_FILE') == 'yes'
-
-    elif logger_name == 'location':
-        log_path = os.getenv('LOCATON_LOG', '')
-        error_path = os.getenv('LOCATION_ERROR', '')
-        log_to_file = os.getenv('LOCATION_LOG_TO_FILE') == 'yes'
-    else:
-        log_to_file = None
-
     logger_log = logging.getLogger(logger_name)
     logger_error = logging.getLogger(logger_name + '_errors')
-
 
     logger_log.setLevel(logging_level)
     logger_error.setLevel(logging_error_level)
 
     formatter = logging.Formatter(fmt="%(asctime)s %(name)s:%(lineno)d [%(levelname)s]: %(message)s")
-    
+
+    log_to_file = os.getenv('LOG_TO_FILE') == 'yes'
     if log_to_file:
+        log_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}.log'
+        error_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}.error'
+
         if Path(log_path).is_file() and Path(error_path).is_file():
             handler_log = logging.FileHandler(log_path)
             handler_error = logging.FileHandler(error_path)
         else:
-            sys.exit("""
-            Yikes! log files are missing
+            sys.exit(f"""
+            Yikes! one or both log files are missing
+            {log_path}
+            {error_path}
             """)
     else:
         handler_log = logging.StreamHandler(stream=sys.stdout)
