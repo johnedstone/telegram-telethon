@@ -4,7 +4,6 @@
     ansible_python_interpreter: /usr/bin/python3
     HOME: "{{ lookup('env', 'HOME') }}"
   vars_files:
-    #- /opt/bitnami/apps/configuration/list_uptimes_private_vars.yaml
     - "{{ lookup('env', 'PATH_TO_PRIVATE_VARS_YAML') }}"
   connection: local
   roles:

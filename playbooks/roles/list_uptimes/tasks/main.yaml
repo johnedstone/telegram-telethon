@@ -11,5 +11,45 @@
     - "/var/log/{{ app_name }}"
     - "/opt/bitnami/apps/{{ app_name }}"
 
+- name: Install requirements file
+  copy:
+    src: requirements.txt
+    dest: "/opt/bitnami/apps/{{ app_name }}/requirements.txt"
+    owner: bitnami
+    group: bitnami
+
+- name: Install specified python requirements
+  pip:
+    requirements: "/opt/bitnami/apps/{{ app_name }}/requirements.txt"
+    virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
+    virtualenv_command: "/usr/bin/virtualenv -p {{ python_version }}"
+  when: not ansible_check_mode
+
+- name: Enable logrotate for "{{ app_name }}"
+  become: yes
+  template:
+    src: logrotate.j2
+    dest: "/etc/logrotate.d/{{ app_name}}"
+
+- name: Install environment variables
+  template:
+    src: env.j2
+    dest: "/opt/bitnami/apps/{{ app_name }}/.env"
+    owner: bitnami
+    group: bitnami
+    mode: 0600
+    #  notify:
+    #- Restart app
+
+- name: Rsync app files
+  synchronize:
+    src: "{{ HOME }}/telegram-telethon/bots/"
+    dest: "/opt/apps/{{ app_name }}/"
+    rsync_opts:
+      - "--exclude Pip*"
+      - "--exclude Readme.md"
+      #notify:
+      #- Restart app
+
 
 # vim: ai et ts=2 sw=2 sts=2 nu

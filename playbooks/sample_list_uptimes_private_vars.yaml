@@ -4,5 +4,13 @@ MariaDB_Root_Password: value
 local_timezone: 'America/New_York'
 
 app_name: 'app_name'
+python_version: 'python3.7'
+
+
+TOKEN_LIST_UPTIMES_BOT: 'token_for_list_uptimes_bot'
+API_ID: 'api_ID'
+API_HASH: 'api_hash'
+REST_API: 'rest_api_endpoint'
+PARAMS: 'paramaters_for_rest_api'
 
 # vim: ai et ts=2 sw=2 sts=2 nu

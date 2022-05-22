@@ -26,7 +26,7 @@ def get_logger(logger_name, logging_level=logging.INFO,
     log_to_file = os.getenv('LOG_TO_FILE') == 'yes'
     if log_to_file:
         log_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}.log'
-        error_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}.error'
+        error_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}_error.log'
 
         if Path(log_path).is_file() and Path(error_path).is_file():
             handler_log = logging.FileHandler(log_path)
