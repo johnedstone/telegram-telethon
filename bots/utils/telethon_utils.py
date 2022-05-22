@@ -29,15 +29,9 @@ def get_logger(logging_level=logging.INFO,
         log_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}.log'
         error_path = os.getenv('LOG_DIR', '/tmp') + f'/{logger_name}_error.log'
 
-        if Path(log_path).is_file() and Path(error_path).is_file():
-            handler_log = logging.FileHandler(log_path)
-            handler_error = logging.FileHandler(error_path)
-        else:
-            sys.exit(f"""
-            Yikes! one or both log files are missing
-            {log_path}
-            {error_path}
-            """)
+        handler_log = logging.FileHandler(log_path)
+        handler_error = logging.FileHandler(error_path)
+
     else:
         handler_log = logging.StreamHandler(stream=sys.stdout)
         handler_error = logging.StreamHandler(stream=sys.stderr)
