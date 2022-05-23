@@ -1,4 +1,7 @@
 ### Typical ansible commands
+
+#### List uptimes bot
+
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/list_uptimes_private_vars.yaml
 
@@ -10,6 +13,19 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/list_uptimes_private_vars.yaml
 
 #skip a role, using a tag, or can be used with --tags to play(run) a role
 /usr/local/bin/ansible-playbook --diff --flush-cache --skip-tags optional_prep_work -i inventory.ini list_uptimes_playbook.yaml
+```
+
+#### Location app bot
+
+```
+export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_app_private_vars.yaml
+
+#dry-run
+/usr/local/bin/ansible-playbook --check --diff --flush-cache --tags location_app -i inventory.ini location_app_playbook.yaml
+
+
+#play
+/usr/local/bin/ansible-playbook --diff --flush-cache --tags location_app -i inventory.ini location_app_playbook.yaml
 ```
 
 <!---
