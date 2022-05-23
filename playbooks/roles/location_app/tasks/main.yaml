@@ -65,8 +65,8 @@
   become: yes
   service:
     name: "{{ app_name }}"
+    enabled: yes
     state: started
-  when: not ansible_check_mode
   notify:
     - "Restart {{ app_name }} app"
 
