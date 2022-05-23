@@ -21,10 +21,10 @@ LOG_TO_FILE='no'
 #LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
 ```
 
-* Samaple env variables file for the location bot
+* Samaple env variables file for the location_app bot
 ```
 TOKEN_LOCATION_BOT='your-unique-bot-token'
-APP_NAME='location_bot'
+APP_NAME='location_app'
 API_ID='your-app-id'
 API_HASH='your-app-hash'
 REST_API='not_using_yet'

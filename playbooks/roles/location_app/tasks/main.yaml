@@ -49,7 +49,7 @@
       - "--exclude Pip*"
       - "--exclude Readme.md"
       - "--exclude .env"
-      - "--exclude location_app.py"
+      - "--exclude list_uptimes.py"
   notify:
     - "Restart {{ app_name }} app"
 
