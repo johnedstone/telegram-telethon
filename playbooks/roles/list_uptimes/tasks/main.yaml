@@ -45,6 +45,13 @@
   synchronize:
     src: "{{ HOME }}/telegram-telethon/bots/"
     dest: "/opt/bitnami/apps/{{ app_name }}/"
+    archive: no
+    perms: yes
+    checksum: yes
+    recursive: yes
+    group: yes
+    owner: yes
+    links: yes
     rsync_opts:
       - "--exclude Pip*"
       - "--exclude Readme.md"
