@@ -8,7 +8,8 @@ This repository contains ...
 AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro-5.9.3-17-r06-linux-debian-10-x86_64-hvm-ebs-nami-78b1d030-4c7d-4ade-b8e6-f8dc86941303" AMI
 
 #### Current State
-  In progress, ... stay tuned!
+  * list_uptimes and location_app bots finished, including ansible playbooks
+  * 22-May-2022: Starting work on rest api for capturing live location
 
 #### To Do
 * Add Ansible role for using Postgres instead of MariaDB 

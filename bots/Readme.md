@@ -1,14 +1,16 @@
 ### Running the bots
-* The bot can be temporarily run by the following commands.  Otherwise,
+* The bots can be temporarily run by the following commands.  Otherwise,
 use the ansible playbook to install and run by systemd
+
+#### List uptimes bot
 ```
 cd bots/
 pipenv shell
-export PATH_TO_ENV_FILE=/path/to/env_variables
+export PATH_TO_ENV_FILE=/path/to/list_uptimes_env_variables
 python list_uptimes.py
 ```
 
-* Samaple env variables file for list_uptimes bot
+* Sample env variables file for list_uptimes bot
 ```
 TOKEN_LIST_UPTIMES_BOT='your-unique-bot-token'
 APP_NAME='list_uptimes'
@@ -21,7 +23,15 @@ LOG_TO_FILE='no'
 #LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
 ```
 
-* Samaple env variables file for the location_app bot
+#### Location app bot
+```
+cd bots/
+pipenv shell
+export PATH_TO_ENV_FILE=/path/to/location_app_env_variables
+python location_app.py
+```
+
+* Sample env variables file for the location_app bot
 ```
 TOKEN_LOCATION_BOT='your-unique-bot-token'
 APP_NAME='location_app'
