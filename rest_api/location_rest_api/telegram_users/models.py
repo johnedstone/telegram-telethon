@@ -1,9 +1,12 @@
 import secrets
 import string
 
+import logging
 from django.db import models
 
 from core.models import TimeStampMixin
+
+logger = logging.getLogger(__name__)
 
 class TelegramUserManager(models.Manager):
     """Ref: https://docs.djangoproject.com/en/4.0/ref/models/instances/
@@ -21,6 +24,7 @@ class TelegramUserManager(models.Manager):
     def create_telegramuser(self, username):
         randomized_id = ''.join(secrets.choice( 
                string.ascii_uppercase + string.digits) for i in range(16))
+        logger.info(randomized_id)
         # Next: check that this is unique
         telegramuser = self.create(username=username,
                 randomized_id=randomized_id)
@@ -29,8 +33,8 @@ class TelegramUserManager(models.Manager):
 
 
 class TelegramUser(TimeStampMixin):
-    username = models.CharField("Device", max_length=50, unique=True)
-    randomized_id = models.CharField("Device", max_length=50, unique=True)
+    username = models.CharField(max_length=50, unique=True)
+    randomized_id = models.CharField(max_length=50, blank=True, default='')
 
     objects = TelegramUserManager()
 

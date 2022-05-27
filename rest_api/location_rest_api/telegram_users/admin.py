@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import TelegramUser
 
-# Register your models here.
+class TelegramUserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'randomized_id')
+
+
+
+admin.site.register(TelegramUser, TelegramUserAdmin)
