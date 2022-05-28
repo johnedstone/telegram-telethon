@@ -30,7 +30,7 @@ class TelegramUser(TimeStampMixin):
     username = models.CharField('username', max_length=50,
             unique=True, blank=False)
     randomized_id = models.CharField('randomized id', max_length=50,
-            unique=True, blank=False, editable=False)
+            unique=True, editable=False)
     # add telegram_id
 
     objects = TelegramUserManager()
