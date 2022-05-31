@@ -12,26 +12,26 @@ class TelegramUserManager(models.Manager):
     Using to create and check randomized_id
     Example:
     >>> from telegram_users.models import TelegramUser as TU
-    >>> tu = TU.objects.create_telegramuser(username="manonman")
+    >>> tu = TU.objects.create_telegramuser(user_id=1234568)
     >>> tu.randomized_id
     'uqcf9ye6c0bv7w74'
     >>> tu.full_clean()
     >>> tu.save()
     """
 
-    def create_telegramuser(self, username):
-        telegramuser = self.create(username=username,
+    def create_telegramuser(self, user_id, username=''):
+        telegramuser = self.create(user_id=user_id, username=username,
                 randomized_id=get_random_id())
 
         return telegramuser
 
 
 class TelegramUser(TimeStampMixin):
+    user_id = models.IntegerField('user_id', unique=True, blank=False)
     username = models.CharField('username', max_length=50,
-            unique=True, blank=False)
+            blank=True, default='')
     randomized_id = models.CharField('randomized id', max_length=50,
             unique=True, editable=False)
-    # add telegram_id
 
     objects = TelegramUserManager()
 

@@ -4,7 +4,8 @@ from .models import TelegramUser
 from core.helper_functions import get_random_id
 
 class TelegramUserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'randomized_id', 'created_at', 'updated_at')
+    list_display = ('username', 'user_id', 'randomized_id', 'created_at',
+            'updated_at')
     exclude = ('randomized_id',)
 
     def save_model(self, request, obj, form, change):
