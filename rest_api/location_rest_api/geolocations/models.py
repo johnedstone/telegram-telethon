@@ -10,6 +10,7 @@ class Geolocation(TimeStampMixin):
             blank=False)
     longitude = models.FloatField(blank=False)
     latitude = models.FloatField(blank=False)
+    accuracy_radius = models.IntegerField(blank=True, null=True)
 
     @property
     def randomized_id(self):
