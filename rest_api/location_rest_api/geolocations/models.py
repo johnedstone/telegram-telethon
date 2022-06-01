@@ -7,7 +7,7 @@ from telegram_users.models import TelegramUser
 class Geolocation(TimeStampMixin):
 
     telegram_user = models.ForeignKey(TelegramUser, on_delete=models.CASCADE,
-            blank=False)
+            blank=False, related_name='geolocation_telegram_user')
     longitude = models.FloatField(blank=False)
     latitude = models.FloatField(blank=False)
     accuracy_radius = models.IntegerField(blank=True, null=True)
