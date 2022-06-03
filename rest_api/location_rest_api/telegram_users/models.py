@@ -23,19 +23,19 @@ class TelegramUserManager(models.Manager):
     """
 
     def create_telegram_user(self, user_id, username=''):
-        telegramuser = self.create(user_id=user_id, username=username,
+        telegram_user = self.create(user_id=user_id, username=username,
                 randomized_id=get_random_id())
 
-        return telegramuser
+        return telegram_user
 
     def get_or_create_telegram_user(self, user_id, username=''):
         try:
-            telegramuser = TelegramUser.objects.get(user_id=user_id)
+            telegram_user = TelegramUser.objects.get(user_id=user_id)
         except TelegramUser.DoesNotExist:
-            telegramuser = self.create(user_id=user_id, username=username,
+            telegram_user = self.create(user_id=user_id, username=username,
                     randomized_id=get_random_id())
 
-        return telegramuser
+        return telegram_user
 
 
 class TelegramUser(TimeStampMixin):
