@@ -18,3 +18,5 @@ class Geolocation(TimeStampMixin):
 
     def __str__(self):
         return f'{self.randomized_id}-{self.created_at}-{self.longitude:.5f}-{self.latitude:.5f}'
+
+# vim: ai et ts=4 sw=4 sts=4 nu

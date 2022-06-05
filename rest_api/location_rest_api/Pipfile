@@ -12,6 +12,7 @@ pyyaml = "*"
 pymysql = "*"
 whitenoise = "*"
 django-filter = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 

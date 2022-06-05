@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd-party apps
     'telegram_users',
     'geolocations',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
