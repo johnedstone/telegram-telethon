@@ -1,4 +1,5 @@
 ### References
+* [Ended up here for def to_internal_value (solution)](https://www.django-rest-framework.org/api-guide/serializers/#baseserializer)
 * [to_internal_value](https://www.django-rest-framework.org/api-guide/serializers/#to_internal_valueself-data)
 * [start here](https://www.django-rest-framework.org/api-guide/relations/)
 * https://ilovedjango.com/django/rest-api-framework/tips/save-foreign-key-using-django-rest-framework-create-method/
