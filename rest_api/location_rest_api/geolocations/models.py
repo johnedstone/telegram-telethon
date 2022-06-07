@@ -13,10 +13,14 @@ class Geolocation(TimeStampMixin):
     accuracy_radius = models.PositiveIntegerField(blank=True, null=True)
 
     @property
-    def randomized_id(self):
+    def telegram_user_randomized_id(self):
         return self.telegram_user.randomized_id
 
+    @property
+    def telegram_user_username(self):
+        return self.telegram_user.username
+
     def __str__(self):
-        return f'{self.randomized_id}-{self.created_at}-{self.longitude:.5f}-{self.latitude:.5f}'
+        return f'{self.telegram_user_randomized_id}-{self.created_at}-{self.longitude:.5f}-{self.latitude:.5f}'
 
 # vim: ai et ts=4 sw=4 sts=4 nu

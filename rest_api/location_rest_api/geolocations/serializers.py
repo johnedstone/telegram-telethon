@@ -10,7 +10,10 @@ class GeolocationSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        fields = ('telegram_user', 'longitude', 'latitude', 'accuracy_radius')
+        fields = ('telegram_user', 'telegram_user_username',
+                'telegram_user_randomized_id', 'longitude',
+                'latitude', 'accuracy_radius')
+
         model = Geolocation
 
 
