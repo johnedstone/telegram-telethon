@@ -20,6 +20,13 @@ class Geolocation(TimeStampMixin):
     def telegram_user_username(self):
         return self.telegram_user.username
 
+    @property
+    def telegram_username_posted(self):
+        if self.telegram_user.username:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return f'{self.telegram_user_randomized_id}-{self.created_at}-{self.longitude:.5f}-{self.latitude:.5f}'
 
