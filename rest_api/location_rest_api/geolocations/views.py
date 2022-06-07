@@ -7,4 +7,3 @@ class GeolocationViewSet(viewsets.ModelViewSet):
     serializer_class = GeolocationSerializer
 
 # vim: ai et ts=4 sw=4 sts=4 nu 
-

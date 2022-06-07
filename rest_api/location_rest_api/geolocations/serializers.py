@@ -5,19 +5,21 @@ from telegram_users.models import TelegramUser
 
 logger = logging.getLogger(__name__)
 
-#class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
-class GeolocationSerializer(serializers.ModelSerializer):
+#class GeolocationSerializer(serializers.ModelSerializer): # developed with this
+class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
 
 
     class Meta:
         fields = (
-                #'telegram_user',
-                #'telegram_user_username',
+                #'telegram_user', # need to set up url pattern to include this
+                'telegram_user_username',
                 'telegram_username_posted',
                 'telegram_user_randomized_id',
                 'longitude',
                 'latitude',
-                'accuracy_radius')
+                'accuracy_radius',
+                'created_at',
+                )
 
         model = Geolocation
 

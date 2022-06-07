@@ -1,11 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from geolocations import views
+from rest_framework.routers import SimpleRouter
+from . import views
 
-router = DefaultRouter()
-router.register(r'geolocations', views.GeolocationViewSet,basename="geolocation")
+router = SimpleRouter()
+router.register(r'geolocations', views.GeolocationViewSet)
 
-# The API URLs are now determined automatically by the router.
-urlpatterns = [
-    path('', include(router.urls)),
-]
+# vim: ai et ts=4 sw=4 sts=4 nu 
