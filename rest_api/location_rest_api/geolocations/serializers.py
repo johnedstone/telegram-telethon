@@ -13,12 +13,14 @@ class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
                 #'telegram_user', # need to set up url pattern to include this
                 'telegram_user_username',
+                'telegram_user_user_id',
                 'telegram_username_posted',
                 'telegram_user_randomized_id',
                 'longitude',
                 'latitude',
                 'accuracy_radius',
                 'created_at',
+                'telegram_user_pk',
                 )
 
         model = Geolocation

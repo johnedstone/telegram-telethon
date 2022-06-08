@@ -24,6 +24,14 @@ class Geolocation(TimeStampMixin):
         return self.telegram_user.username
 
     @property
+    def telegram_user_user_id(self):
+        return self.telegram_user.user_id
+
+    @property
+    def telegram_user_pk(self):
+        return self.telegram_user.pk
+
+    @property
     def telegram_username_posted(self):
         if self.telegram_user.username:
             return True

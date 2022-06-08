@@ -39,6 +39,10 @@ class TelegramUserManager(models.Manager):
 
 
 class TelegramUser(TimeStampMixin):
+
+    class Meta:
+        ordering = ['created_at']
+
     user_id = models.PositiveIntegerField('user_id', unique=True, blank=False)
     username = models.CharField('username', max_length=50,
             blank=True, default='')

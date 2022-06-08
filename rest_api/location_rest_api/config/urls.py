@@ -6,9 +6,11 @@ from django.shortcuts import redirect
 
 from rest_framework.routers import DefaultRouter
 from geolocations.urls import router as geolocation_router
+from telegram_users.urls import router as telegram_user_router
 
 router = DefaultRouter()
 router.registry.extend(geolocation_router.registry)
+router.registry.extend(telegram_user_router.registry)
 
 
 urlpatterns = [
