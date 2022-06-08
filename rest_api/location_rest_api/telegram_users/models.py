@@ -53,7 +53,7 @@ class TelegramUser(TimeStampMixin):
 
     def __str__(self):
         return f'{self.user_id}-username_unknown'
-        return f'{self.user_id}-{self.username}'
-        return f'{self.user_id}'
+        #return f'{self.user_id}-{self.username}'
+        #return f'{self.user_id}'
 
 # vim: ai et ts=4 sw=4 sts=4 nu 
