@@ -5,31 +5,15 @@ from telegram_users.models import TelegramUser
 
 logger = logging.getLogger(__name__)
 
-#class GeolocationSerializer(serializers.ModelSerializer): # developed with this
-class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
-
-
-    class Meta:
-        fields = (
-                #'telegram_user', # need to set up url pattern to include this
-                'telegram_user_username',
-                'telegram_user_user_id',
-                'telegram_username_posted',
-                'telegram_user_randomized_id',
-                'longitude',
-                'latitude',
-                'accuracy_radius',
-                'created_at',
-                'telegram_user_pk',
-                )
-
-        model = Geolocation
-
+#class GeolocationSerializerBase(serializers.ModelSerializer): # developed with this
+class GeolocationSerializerBase(serializers.HyperlinkedModelSerializer):
+    """
+    A base serializer (Mixin) to be used by the following serializers
+    """
 
     def to_internal_value(self, data):
 
         logger.info(data)
-        # Not sure if this validation check is needed
         for ea in ['telegram_user', 'longitude', 'latitude']:
             if ea not in data:
                 logger.info(f'{ea} is required.')
@@ -61,5 +45,22 @@ class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
         data['telegram_user'] = telegram_user
 
         return data
+
+class GeolocationSerializer(GeolocationSerializerBase):
+
+    class Meta:
+        model = Geolocation
+        fields = (
+                'telegram_user', # need to set up url pattern to include this
+                'telegram_user_username',
+                'telegram_user_user_id',
+                'telegram_username_posted',
+                'telegram_user_randomized_id',
+                'longitude',
+                'latitude',
+                'accuracy_radius',
+                'created_at',
+                'telegram_user_pk',
+                )
 
 # vim: ai et ts=4 sw=4 sts=4 nu 
