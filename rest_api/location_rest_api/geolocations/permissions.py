@@ -9,7 +9,10 @@ class GeolocationPermissions(permissions.BasePermission):
         logger.debug(dir(request.user))
         logger.debug(request.user.get_all_permissions())
 
-        if request.user.has_perm('geolocations.can_view_randomized_data_only'):
+        if request.user.is_superuser:
+            view.http_method_names = ['get', 'post', 'head', 'options']
+            return True
+        elif request.user.has_perm('geolocations.can_view_randomized_data_only'):
             view.http_method_names = ['get', 'head', 'options']
             return True
         elif request.user.has_perm('geolocations.can_post_geolocation'):

@@ -23,7 +23,9 @@ class GeolocationViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self, *args, **kwargs):
         user = self.request.user
 
-        if user.has_perm('geolocations.can_view_randomized_data_only'):
+        if user.is_superuser:
+            return GeolocationSerializer
+        elif user.has_perm('geolocations.can_view_randomized_data_only'):
             return GeolocationSerializerRandomizedDataOnly
         elif user.has_perm('geolocations.can_post_geolocation'):
             return GeolocationSerializerCanPost

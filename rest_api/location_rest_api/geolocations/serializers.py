@@ -5,6 +5,7 @@ from .mixins import GeolocationSerializerBase
 logger = logging.getLogger(__name__)
 
 class GeolocationSerializer(GeolocationSerializerBase):
+    """Using for superuser"""
 
     class Meta:
         model = Geolocation
