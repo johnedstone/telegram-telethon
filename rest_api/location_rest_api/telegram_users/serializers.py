@@ -13,7 +13,18 @@ class TelegramUserSerializer(serializers.HyperlinkedModelSerializer):
                 'created_at',
                 'randomized_id',
                 'url',
-                'id',
+                'username',
+                'user_id',
+        )
+        model = TelegramUser
+
+class TelegramUserSerializerPatch(serializers.HyperlinkedModelSerializer):
+
+
+    class Meta:
+        fields = (
+                'updated_at',
+                'url',
                 'username',
                 'user_id',
         )

@@ -19,7 +19,6 @@ class GeolocationSerializer(GeolocationSerializerBase):
                 'latitude',
                 'accuracy_radius',
                 'created_at',
-                'telegram_user_pk',
                 )
 
 class GeolocationSerializerRandomizedDataOnly(GeolocationSerializerBase):
@@ -57,6 +56,7 @@ class GeolocationSerializerViewAllData(GeolocationSerializerBase):
                 'telegram_user_username',
                 'telegram_user_user_id',
                 'telegram_username_posted',
+                'telegram_user_randomized_id',
                 'longitude',
                 'latitude',
                 'accuracy_radius',

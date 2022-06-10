@@ -15,9 +15,6 @@ logger = logging.getLogger(__name__)
 
 class GeolocationViewSet(viewsets.ModelViewSet):
     queryset = Geolocation.objects.all()
-
-    #http_method_names = ['get', 'head', 'options']
-
     permission_classes = [GeolocationPermissions]
 
     def get_serializer_class(self, *args, **kwargs):
@@ -25,12 +22,16 @@ class GeolocationViewSet(viewsets.ModelViewSet):
 
         if user.is_superuser:
             return GeolocationSerializer
+
         elif user.has_perm('geolocations.can_view_randomized_data_only'):
             return GeolocationSerializerRandomizedDataOnly
+
         elif user.has_perm('geolocations.can_post_geolocation'):
             return GeolocationSerializerCanPost
+
         elif user.has_perm('geolocations.can_view_all_data'):
             return GeolocationSerializerViewAllData
+
         else:
             raise PermissionDenied
 
