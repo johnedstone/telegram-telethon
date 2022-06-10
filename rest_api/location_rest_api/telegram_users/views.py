@@ -1,7 +1,10 @@
 from rest_framework import viewsets
 from .models import TelegramUser
-from .serializers import TelegramUserSerializer
 from .permissions import TelegramUserPermissions
+from .serializers import (
+        TelegramUserSerializer,
+        TelegramUserSerializerPatch,
+)
 
 class TelegramUserViewSet(viewsets.ModelViewSet):
     queryset = TelegramUser.objects.all()
@@ -18,7 +21,7 @@ class TelegramUserViewSet(viewsets.ModelViewSet):
             raise PermissionDenied
 
         elif user.has_perm('geolocations.can_post_geolocation'):
-            return TelegramSerializerPatch
+            return TelegramUserSerializerPatch
 
         elif user.has_perm('geolocations.can_view_all_data'):
             raise PermissionDenied
