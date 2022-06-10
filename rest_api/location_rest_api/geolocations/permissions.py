@@ -15,6 +15,9 @@ class GeolocationPermissions(permissions.BasePermission):
         elif request.user.has_perm('geolocations.can_post_geolocation'):
             view.http_method_names = ['post', 'head', 'options']
             return True
+        elif request.user.has_perm('geolocations.can_view_all_data'):
+            view.http_method_names = ['get', 'head', 'options']
+            return True
         else:
             return False
 

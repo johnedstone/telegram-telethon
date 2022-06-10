@@ -47,4 +47,19 @@ class GeolocationSerializerCanPost(GeolocationSerializerBase):
                 #'created_at',
                 )
 
+class GeolocationSerializerViewAllData(GeolocationSerializerBase):
+
+    class Meta:
+        model = Geolocation
+        fields = (
+                'telegram_user',
+                'telegram_user_username',
+                'telegram_user_user_id',
+                'telegram_username_posted',
+                'longitude',
+                'latitude',
+                'accuracy_radius',
+                'created_at',
+                )
+
 # vim: ai et ts=4 sw=4 sts=4 nu 

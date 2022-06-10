@@ -11,4 +11,7 @@ http localhost:8000/api/v1/geolocations/  "Authorization: Token d173dcdbbf5d3188
 
 * Viewing all the data with a token that allows `can_view_all_data`
 ```
+http localhost:8000/api/v1/geolocations/ "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
+
+
 ``` 

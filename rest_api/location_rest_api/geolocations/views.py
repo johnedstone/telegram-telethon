@@ -8,6 +8,7 @@ from .serializers import (
     GeolocationSerializer,
     GeolocationSerializerRandomizedDataOnly,
     GeolocationSerializerCanPost,
+    GeolocationSerializerViewAllData,
 )
 
 logger = logging.getLogger(__name__)
@@ -26,6 +27,8 @@ class GeolocationViewSet(viewsets.ModelViewSet):
             return GeolocationSerializerRandomizedDataOnly
         elif user.has_perm('geolocations.can_post_geolocation'):
             return GeolocationSerializerCanPost
+        elif user.has_perm('geolocations.can_view_all_data'):
+            return GeolocationSerializerViewAllData
         else:
             raise PermissionDenied
 
