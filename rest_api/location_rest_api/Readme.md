@@ -1,4 +1,4 @@
-### Example commands.
+### Example commands
 * List (user_id randomized) geolocation data with the token that allows `can_view_randomized_data_only`
 ```
 http localhost:8000/api/v1/geolocations/  "Authorization: Token 10605f6df2cd886feb45e2bffcc1f21447d15399"
