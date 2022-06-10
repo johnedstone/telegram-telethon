@@ -1,20 +1,33 @@
+import logging
 from rest_framework import viewsets
 from rest_framework.exceptions import PermissionDenied
 from .models import Geolocation
-from .serializers import GeolocationSerializer
+from .permissions import GeolocationPermissions
+
+from .serializers import (
+    GeolocationSerializer,
+    GeolocationSerializerRandomizedDataOnly,
+    GeolocationSerializerCanPost,
+)
+
+logger = logging.getLogger(__name__)
 
 class GeolocationViewSet(viewsets.ModelViewSet):
     queryset = Geolocation.objects.all()
 
+    #http_method_names = ['get', 'head', 'options']
+
+    permission_classes = [GeolocationPermissions]
+
     def get_serializer_class(self, *args, **kwargs):
         user = self.request.user
-        return GeolocationSerializer
-        """Set globally
-        if user.is_authenticated:
-            return GeolocationSerializer
+
+        if user.has_perm('geolocations.can_view_randomized_data_only'):
+            return GeolocationSerializerRandomizedDataOnly
+        elif user.has_perm('geolocations.can_post_geolocation'):
+            return GeolocationSerializerCanPost
         else:
             raise PermissionDenied
-        """
 
 
 # vim: ai et ts=4 sw=4 sts=4 nu 

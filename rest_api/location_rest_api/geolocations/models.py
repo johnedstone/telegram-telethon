@@ -7,6 +7,11 @@ from telegram_users.models import TelegramUser
 class Geolocation(TimeStampMixin):
 
     class Meta:
+        permissions = [
+            ("can_view_randomized_data_only", "Can view randomized data only"),
+            ("can_view_all_data", "Can view all data"),
+            ("can_post_geolocation", "Can post geolocation"),
+        ]
         ordering = ['-created_at']
 
     telegram_user = models.ForeignKey(TelegramUser, on_delete=models.CASCADE,
