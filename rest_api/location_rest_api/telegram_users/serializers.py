@@ -5,6 +5,7 @@ from .models import TelegramUser
 logger = logging.getLogger(__name__)
 
 class TelegramUserSerializer(serializers.HyperlinkedModelSerializer):
+    """Using for superuser"""
 
 
     class Meta:
