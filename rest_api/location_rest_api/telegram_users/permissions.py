@@ -13,12 +13,14 @@ class TelegramUserPermissions(permissions.BasePermission):
             view.http_method_names = ['get', 'patch', 'head', 'options']
             return True
         elif request.user.has_perm('geolocations.can_view_randomized_data_only'):
-            return False
+            view.http_method_names = ['get', 'head', 'options']
+            return True
         elif request.user.has_perm('geolocations.can_post_geolocation'):
             view.http_method_names = ['patch', 'head', 'options']
             return True
         elif request.user.has_perm('geolocations.can_view_all_data'):
-            return False
+            view.http_method_names = ['get', 'head', 'options']
+            return True
         else:
             return False
 

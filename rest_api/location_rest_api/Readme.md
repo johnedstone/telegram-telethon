@@ -14,11 +14,21 @@ http localhost:8000/api/v1/geolocations/  "Authorization: Token d173dcdbbf5d3188
 http patch localhost:8000/api/v1/telegram-users/2/ "Authorization: Token d173dcdbbf5d31882d8b1c1e5d199239f7dd4c47" username=thursday-afternoon
 ```
 
-* Viewing all the data with a token that allows `can_view_all_data`
+* Viewing all the geolocation data with a token that allows `can_view_all_data`
 ```
 http localhost:8000/api/v1/geolocations/ "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
 
 ``` 
+
+* Viewing the geolocation data with `ordering=-created_at`  and filtering on `telegram_user=23`
+```
+http localhost:8000/api/v1/geolocations/?ordering=-created_at\&telegram_user=23 "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
+```
+
+* Viewer telegram_users data with `ordering=user_id`
+```
+http localhost:8000/api/v1/telegram-users/?ordering=user_id "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
+```
 
 <!---
 # vim: ai et ts=4 sw=2 sts=4 nu

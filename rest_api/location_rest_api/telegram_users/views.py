@@ -3,13 +3,20 @@ from .models import TelegramUser
 from .permissions import TelegramUserPermissions
 from .serializers import (
         TelegramUserSerializer,
+        TelegramUserSerializerRandomized,
         TelegramUserSerializerPatch,
+        TelegramUserSerializerViewAll,
 )
 
 class TelegramUserViewSet(viewsets.ModelViewSet):
     queryset = TelegramUser.objects.all()
     permission_classes = [TelegramUserPermissions]
     serializer_class = TelegramUserSerializer
+    ordering_fields = [
+        'randomized_id',
+        'username',
+        'user_id',
+    ]
 
     def get_serializer_class(self, *args, **kwargs):
         user = self.request.user
@@ -18,13 +25,13 @@ class TelegramUserViewSet(viewsets.ModelViewSet):
             return TelegramUserSerializer
 
         elif user.has_perm('geolocations.can_view_randomized_data_only'):
-            raise PermissionDenied
+            return TelegramUserSerializerRandomized
 
         elif user.has_perm('geolocations.can_post_geolocation'):
             return TelegramUserSerializerPatch
 
         elif user.has_perm('geolocations.can_view_all_data'):
-            raise PermissionDenied
+            return TelegramUserSerializerViewAll
 
         else:
             raise PermissionDenied

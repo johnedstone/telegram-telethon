@@ -7,7 +7,6 @@ logger = logging.getLogger(__name__)
 class TelegramUserSerializer(serializers.HyperlinkedModelSerializer):
     """Using for superuser"""
 
-
     class Meta:
         fields = (
                 'updated_at',
@@ -18,13 +17,33 @@ class TelegramUserSerializer(serializers.HyperlinkedModelSerializer):
                 'user_id',
         )
         model = TelegramUser
+class TelegramUserSerializerRandomized(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        fields = (
+                'randomized_id',
+                'url',
+        )
+        model = TelegramUser
 
 class TelegramUserSerializerPatch(serializers.HyperlinkedModelSerializer):
-
 
     class Meta:
         fields = (
                 'updated_at',
+                'url',
+                'username',
+                'user_id',
+        )
+        model = TelegramUser
+
+class TelegramUserSerializerViewAll(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        fields = (
+                'updated_at',
+                'created_at',
+                'randomized_id',
                 'url',
                 'username',
                 'user_id',
