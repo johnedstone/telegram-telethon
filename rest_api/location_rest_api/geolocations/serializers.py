@@ -18,6 +18,8 @@ class GeolocationSerializer(GeolocationSerializerBase):
                 'longitude',
                 'latitude',
                 'accuracy_radius',
+                'heading',
+                'period',
                 'created_at',
                 )
 
@@ -31,6 +33,8 @@ class GeolocationSerializerRandomizedDataOnly(GeolocationSerializerBase):
                 'longitude',
                 'latitude',
                 'accuracy_radius',
+                'heading',
+                'period',
                 'created_at',
                 )
 
@@ -42,9 +46,11 @@ class GeolocationSerializerCanPost(GeolocationSerializerBase):
                 #'telegram_user_randomized_id',
                 'telegram_user',
                 'telegram_username_posted',
-                #'longitude',
-                #'latitude',
-                #'accuracy_radius',
+                'longitude',
+                'latitude',
+                'accuracy_radius',
+                'heading',
+                'period',
                 #'created_at',
                 )
 
@@ -61,6 +67,8 @@ class GeolocationSerializerViewAllData(GeolocationSerializerBase):
                 'longitude',
                 'latitude',
                 'accuracy_radius',
+                'heading',
+                'period',
                 'created_at',
                 )
 

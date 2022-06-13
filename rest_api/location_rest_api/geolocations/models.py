@@ -21,6 +21,8 @@ class Geolocation(TimeStampMixin):
     longitude = models.FloatField(blank=False)
     latitude = models.FloatField(blank=False)
     accuracy_radius = models.PositiveIntegerField(blank=True, null=True)
+    heading = models.PositiveIntegerField(blank=True, null=True)
+    period = models.PositiveIntegerField(blank=True, null=True)
 
     @property
     def telegram_user_randomized_id(self):
