@@ -4,6 +4,8 @@ from django.db import models
 from core.models import TimeStampMixin
 from telegram_users.models import TelegramUser
 
+logger = logging.getLogger(__name__)
+
 class Geolocation(TimeStampMixin):
 
     class Meta:

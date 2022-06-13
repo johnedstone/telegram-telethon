@@ -1,6 +1,8 @@
 import logging
 from rest_framework import viewsets
 from rest_framework.exceptions import PermissionDenied
+from django_filters import rest_framework as filters
+
 from .models import Geolocation
 from .permissions import GeolocationPermissions
 
@@ -13,16 +15,20 @@ from .serializers import (
 
 logger = logging.getLogger(__name__)
 
+
+class GeolocationFilter(filters.FilterSet):
+    created_at = filters.DateFromToRangeFilter()
+
+    class Meta:
+        model = Geolocation
+        fields = ['created_at', 'telegram_user']
+
+
 class GeolocationViewSet(viewsets.ModelViewSet):
     queryset = Geolocation.objects.all()
     permission_classes = [GeolocationPermissions]
-    filterset_fields = [
-        'telegram_user',
-    #    'telegram_user_username',
-    #    'telegram_user_user_id',
-    #    'telegram_user_randomized_id',
-    ]
     ordering_fields = ['created_at']
+    filterset_class = GeolocationFilter
 
     def get_serializer_class(self, *args, **kwargs):
         user = self.request.user

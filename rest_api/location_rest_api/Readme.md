@@ -25,9 +25,14 @@ http localhost:8000/api/v1/geolocations/ "Authorization: Token 049915526c2ccc568
 http localhost:8000/api/v1/geolocations/?ordering=-created_at\&telegram_user=23 "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
 ```
 
-* Viewer telegram_users data with `ordering=user_id`
+* Viewing telegram_users data with `ordering=user_id`
 ```
 http localhost:8000/api/v1/telegram-users/?ordering=user_id "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
+```
+
+* Viewing geolocation data for telegram user id=23, created on 09-Jun-2022, and ordered by creating date 
+```
+http localhost:8000/api/v1/geolocations/?ordering=-created_at\&telegram_user=23\&created_at_after="2022-06-09"\&created_at_before="2022-06-09" "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
 ```
 
 <!---
