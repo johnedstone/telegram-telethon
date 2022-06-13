@@ -22,7 +22,7 @@ http localhost:8000/api/v1/geolocations/ "Authorization: Token 049915526c2ccc568
 
 ``` 
 
-* __Filter__ geolocation data for `telegram_user=23` which is its (url/id), created on 09-Jun-2022, and `ordering=-created_at`
+* __Filter__ geolocation data for `telegram_user=23` which is its (url/id of telegram_user), created on 09-Jun-2022, and `ordering=-created_at`
 ```
 http localhost:8000/api/v1/geolocations/?ordering=-created_at\&telegram_user=23\&created_at_after="2022-06-09"\&created_at_before="2022-06-09" "Authorization: Token 049915526c2ccc56852b0a556789b5f7a21f5c14"
 ```
