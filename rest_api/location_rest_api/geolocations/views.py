@@ -18,6 +18,9 @@ logger = logging.getLogger(__name__)
 
 class GeolocationFilter(filters.FilterSet):
     created_at = filters.DateFromToRangeFilter()
+    telegram_user_user_id = filters.NumberFilter(field_name='telegram_user', lookup_expr="user_id__exact")
+    telegram_user_username = filters.CharFilter(field_name='telegram_user', lookup_expr="username__exact")
+    telegram_user_randomized_id = filters.CharFilter(field_name='telegram_user', lookup_expr="randomized_id__exact")
 
     class Meta:
         model = Geolocation

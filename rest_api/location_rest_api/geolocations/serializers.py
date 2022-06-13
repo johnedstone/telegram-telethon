@@ -26,6 +26,7 @@ class GeolocationSerializerRandomizedDataOnly(GeolocationSerializerBase):
     class Meta:
         model = Geolocation
         fields = (
+                'telegram_user',
                 'telegram_user_randomized_id',
                 'longitude',
                 'latitude',
