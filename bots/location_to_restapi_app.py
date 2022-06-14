@@ -5,7 +5,7 @@ import re
 
 from telethon import events, Button, utils
 from utils.telethon_utils_v2 import start_bot, get_logger
-from utils.post_to_restapi import post_to_restapi
+from utils.post_to_restapi import post_to_restapi, patch_username
 
 logger_log, logger_error = get_logger(logging_level=logging.INFO)
 
@@ -93,8 +93,18 @@ async def handler(event):
         if accuracy_radius:
             data['accuracy_radius'] = accuracy_radius
 
-        response = post_to_restapi(logger_log, logger_error, data)
-        logger_log.info(response)
+        try:
+            response = post_to_restapi(logger_log, logger_error, data)
+            if response.status_code == 201:
+                response_dict = response.json()
+                if 'telegram_username_posted' in response_dict:
+                    if not response_dict['telegram_username_posted']:
+                        username_response = patch_username(logger_log, logger_error, 'boo')
+                        logger_log.info(username_response)
+
+        except Exception as e:
+            logger_error.warning(f'posting to restapi error: {e}')
+
 
     else:
         logger_log.debug('No, not a geo object')
