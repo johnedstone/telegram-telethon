@@ -5,12 +5,12 @@ import re
 import requests
 
 from telethon import events, Button, utils
-from utils.telethon_utils import start_bot, get_logger
+from utils.telethon_utils_v2 import start_bot, get_logger
 from utils.post_to_restapi import post_to_restapi
 
 logger_log, logger_error = get_logger(logging_level=logging.INFO)
 
-bot, rest_api, params = start_bot('TOKEN_LOCATION_BOT', logger_log, logger_error)
+bot = start_bot('TOKEN_LOCATION_BOT', logger_log, logger_error)
 
 """ Use to figure out what kind of message is 'coming in'
 

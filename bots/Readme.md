@@ -44,6 +44,26 @@ LOG_TO_FILE='no'
 #LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
 ```
 
+#### Location to rest api app bot
+```
+cd bots/
+pipenv shell
+export PATH_TO_ENV_FILE=/path/to/location_to_restapi_app_env_variables
+python location_to_restapi_app.py
+```
+
+* Sample env variables file for the location_to_restapi_app bot
+TOKEN_LOCATION_BOT='your-unique-bot-token'
+APP_NAME='location_app'
+API_ID='your-app-id'
+API_HASH='your-app-hash'
+REST_API='https://rest.api/enpoint'
+REST_API_TOKEN='the-rest-api-token-for-authenticating-for-posting'
+
+LOG_TO_FILE='no'
+#LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
+```
+
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
 -->

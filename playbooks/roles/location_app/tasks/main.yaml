@@ -57,6 +57,9 @@
       - "--exclude Readme.md"
       - "--exclude .env"
       - "--exclude list_uptimes.py"
+      - "--exclude location_to_restapi_app.py"
+      - "--exclude post_to_restapi.py"
+      - "--exclude telethon_utils_v2.py"
   notify:
     - "Restart {{ app_name }} app"
 
