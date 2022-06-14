@@ -10,6 +10,8 @@ class GeolocationSerializerBase(serializers.HyperlinkedModelSerializer):
     A base serializer (Mixin) to be used by the following serializers
     """
 
+    bot = serializers.ReadOnlyField(source='bot.username')
+
     def to_internal_value(self, data):
 
         logger.info(data)

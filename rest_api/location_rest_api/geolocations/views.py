@@ -51,5 +51,7 @@ class GeolocationViewSet(viewsets.ModelViewSet):
         else:
             raise PermissionDenied
 
+    def perform_create(self, serializer):
+        serializer.save(bot=self.request.user)
 
 # vim: ai et ts=4 sw=4 sts=4 nu 

@@ -104,15 +104,16 @@ async def handler(event):
         try:
             response = post_to_restapi(logger_log, logger_error, data)
             if response.status_code == 201:
-                response_dict = response.json()
-                if 'telegram_username_posted' in response_dict:
-                    if not response_dict['telegram_username_posted']:
-                        username = await get_username(event.peer_id.user_id)
+                logger_log.info(response.text)
 
-                        username_response = patch_username(logger_log, logger_error,
-                                url=response_dict['telegram_user'],
-                                username=username)
-                        logger_log.info(username_response)
+                response_dict = response.json()
+                if not response_dict['telegram_username_posted']:
+                    username = await get_username(event.peer_id.user_id)
+
+                    username_response = patch_username(logger_log, logger_error,
+                            url=response_dict['telegram_user'],
+                            username=username)
+                    logger_log.info(username_response)
 
         except Exception as e:
             logger_error.warning(f'posting to restapi error: {e}')

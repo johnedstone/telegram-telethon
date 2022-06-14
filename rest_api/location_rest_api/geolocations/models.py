@@ -23,6 +23,8 @@ class Geolocation(TimeStampMixin):
     accuracy_radius = models.PositiveIntegerField(blank=True, null=True)
     heading = models.PositiveIntegerField(blank=True, null=True)
     period = models.PositiveIntegerField(blank=True, null=True)
+    #bot = models.ForeignKey('auth.User', related_name='geolocation', on_delete=models.CASCADE) # change on the next clean db
+    bot = models.ForeignKey('auth.User', related_name='geolocation', on_delete=models.CASCADE, blank=True, null=True)
 
     @property
     def telegram_user_randomized_id(self):
