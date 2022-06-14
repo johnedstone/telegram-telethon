@@ -20,6 +20,14 @@ async def handler(event):
     logger_log.warning('#' * 50)
 """
 
+async def get_username(user_id):
+
+    user = await bot.get_entity(user_id)
+
+    username = utils.get_display_name(user)
+    logger_log.debug(username)
+
+    return username
 
 @bot.on(events.MessageEdited)
 async def handler(event):
@@ -99,7 +107,11 @@ async def handler(event):
                 response_dict = response.json()
                 if 'telegram_username_posted' in response_dict:
                     if not response_dict['telegram_username_posted']:
-                        username_response = patch_username(logger_log, logger_error, 'boo')
+                        username = await get_username(event.peer_id.user_id)
+
+                        username_response = patch_username(logger_log, logger_error,
+                                url=response_dict['telegram_user'],
+                                username=username)
                         logger_log.info(username_response)
 
         except Exception as e:
