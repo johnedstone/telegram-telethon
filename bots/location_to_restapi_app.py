@@ -2,7 +2,6 @@
 
 import logging
 import re
-import requests
 
 from telethon import events, Button, utils
 from utils.telethon_utils_v2 import start_bot, get_logger
@@ -84,8 +83,19 @@ async def handler(event):
  
         logger_log.info(msg)
 
-        response = post_to_restapi(logger_log, logger_error)
+        data = {
+                'telegram_user': event.peer_id.user_id,
+                'longitude': event.media.geo.long,
+                'latitude': event.media.geo.long,
+        }
+
+        accuracy_radius = event.media.geo.accuracy_radius
+        if accuracy_radius:
+            data['accuracy_radius'] = accuracy_radius
+
+        response = post_to_restapi(logger_log, logger_error, data)
         logger_log.info(response)
+
     else:
         logger_log.debug('No, not a geo object')
         logger_log.debug(f'event: {event}')
