@@ -101,10 +101,11 @@ async def handler(event):
         if accuracy_radius:
             data['accuracy_radius'] = accuracy_radius
 
+        # move all of this to a function
         try:
             response = post_to_restapi(logger_log, logger_error, data)
             if response.status_code == 201:
-                logger_log.info(response.text)
+                logger_log.debug(response.text)
 
                 response_dict = response.json()
                 if not response_dict['telegram_username_posted']:
@@ -114,10 +115,13 @@ async def handler(event):
                             url=response_dict['telegram_user'],
                             username=username)
                     logger_log.info(username_response)
+                else:
+                    logger_log.info('username has been posted, nothing to d')
 
+            else:
+                logger_error.error(f'Posting this geolocation event failed: {response.status_code} status code')
         except Exception as e:
             logger_error.warning(f'posting to restapi error: {e}')
-
 
     else:
         logger_log.debug('No, not a geo object')
