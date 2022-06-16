@@ -17,12 +17,10 @@ def post_to_restapi(logger_log, logger_error, data):
         logger_error.error(f'{e}')
         return f'post error: {e}'
 
-def patch_username(logger_log, logger_error, url, username):
+def patch_username(logger_log, logger_error, url, data):
     try:
-        return url, username 
-
-        #r = requests.patch(url=REST_API, headers=HEADERS, json=data)
-        #return r
+        r = requests.patch(url, headers=HEADERS, json=data)
+        return r
     except Exception as e:
         logger_error.error(f'{e}')
         return f'patch error: {e}'

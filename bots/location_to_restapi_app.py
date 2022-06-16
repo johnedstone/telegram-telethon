@@ -57,6 +57,8 @@ async def handler(event):
         logger_log.info(msg)
         #await event.respond(msg)
 
+        # post this data - this is next
+
 @bot.on(events.NewMessage)
 async def handler(event):
     if event.geo:
@@ -101,7 +103,6 @@ async def handler(event):
         if accuracy_radius:
             data['accuracy_radius'] = accuracy_radius
 
-        # move all of this to a function
         try:
             response = post_to_restapi(logger_log, logger_error, data)
             if response.status_code == 201:
@@ -113,10 +114,12 @@ async def handler(event):
 
                     username_response = patch_username(logger_log, logger_error,
                             url=response_dict['telegram_user'],
-                            username=username)
-                    logger_log.info(username_response)
+                            data={"username": username})
+                    logger_log.info(
+                        f'''{username_response.status_code}, {username_response.text}''')
+
                 else:
-                    logger_log.info('username has been posted, nothing to d')
+                    logger_log.info('username has been posted, no need to patch the username')
 
             else:
                 logger_error.error(f'Posting this geolocation event failed: {response.status_code} status code')
