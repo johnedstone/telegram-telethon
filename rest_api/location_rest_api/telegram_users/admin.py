@@ -12,5 +12,10 @@ class TelegramUserAdmin(admin.ModelAdmin):
         obj.randomized_id = get_random_id()
         super().save_model(request, obj, form, change)
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['username', 'user_id']
+        return []
+
 
 admin.site.register(TelegramUser, TelegramUserAdmin)
