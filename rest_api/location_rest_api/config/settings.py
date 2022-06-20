@@ -9,8 +9,21 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Use export PATH_TO_ENV_FILE=/path/ for development
+env_file = os.getenv('PATH_TO_ENV_FILE', '.env_production')
+load_dotenv(env_file)
+
+PROD = os.getenv('PRODUCTION') == 'yes'
+
+if PROD:
+    print(os.getenv('PROD_SECRET_KEY'))
+else:
+    print(os.getenv('DEV_SECRET_KEY'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
