@@ -23,7 +23,7 @@ LOG_TO_FILE='no'
 #LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
 ```
 
-#### Location app bot
+#### location_app_bot
 ```
 cd bots/
 pipenv shell
@@ -44,7 +44,7 @@ LOG_TO_FILE='no'
 #LOG_DIR=/path/to/logs # Not neccessary unless above is 'yes'
 ```
 
-#### Location to rest api app bot
+#### location_to_restapi_app_bot
 ```
 cd bots/
 pipenv shell

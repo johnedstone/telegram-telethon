@@ -2,14 +2,14 @@
 HOSTNAME: value
 local_timezone: 'America/New_York'
 
-app_name: 'app_name'
+app_name: 'location_app'
 python_version: 'python3.7'
 
-PATH_TO_PYTHON: '/path/to/venv/bin/python'
+PATH_TO_PYTHON: '/opt/bitnami/apps/location_app/venv/bin/python'
 LIVE_APP_SCRIPT: 'location_app.py'
+PATH_TO_ENV_FILE: '/opt/bitnami/apps/location_app/.env'
 
-PATH_TO_ENV_FILE: '/path/to/.env/file'
-TOKEN_LIST_UPTIMES_BOT: 'token_for_list_uptimes_bot'
+TOKEN_LOCATION_BOT: 'token_for_location_app_bot'
 API_ID: 'api_id'
 API_HASH: 'api_hash'
 REST_API: 'rest_api_endpoint'

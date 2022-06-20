@@ -1,0 +1,17 @@
+---
+HOSTNAME: value
+local_timezone: 'America/New_York'
+
+app_name: 'app_name'
+python_version: 'python3.7'
+
+PATH_TO_PYTHON: '/path/to/venv/bin/python'
+LIVE_APP_SCRIPT: 'location_to_rest_api_app.py'
+PATH_TO_ENV_FILE: '/path/to/.env/file'
+
+API_ID: 'api_id'
+API_HASH: 'api_hash'
+REST_API: 'rest_api_endpoint'
+REST_API_TOKEN: 'rest_api_token'
+
+# vim: ai et ts=2 sw=2 sts=2 nu

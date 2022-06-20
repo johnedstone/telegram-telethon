@@ -2,17 +2,17 @@
 HOSTNAME: value
 local_timezone: 'America/New_York'
 
-app_name: 'app_name'
+app_name: 'list_uptimes'
 python_version: 'python3.7'
 
-PATH_TO_PYTHON: '/path/to/venv/bin/python'
+PATH_TO_PYTHON: '/opt/bitnami/apps/list_uptimes/venv/bin/python'
 LIVE_APP_SCRIPT: 'list_uptimes.py'
 
-PATH_TO_ENV_FILE: '/path/to/.env/file'
+PATH_TO_ENV_FILE: '/opt/bitnami/apps/list_uptmes/.env'
 TOKEN_LIST_UPTIMES_BOT: 'token_for_list_uptimes_bot'
 API_ID: 'api_ID'
 API_HASH: 'api_hash'
 REST_API: 'rest_api_endpoint'
-PARAMS='{"ordering": "-created_at"}'
+PARAMS: '{"ordering": "-created_at"}'
 
 # vim: ai et ts=2 sw=2 sts=2 nu
