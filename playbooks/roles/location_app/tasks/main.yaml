@@ -52,14 +52,14 @@
     group: yes
     owner: yes
     links: yes
-    rsync_opts:
-      - "--exclude Pip*"
-      - "--exclude Readme.md"
-      - "--exclude .env"
-      - "--exclude list_uptimes.py"
-      - "--exclude location_to_restapi_app.py"
-      - "--exclude post_to_restapi.py"
-      - "--exclude telethon_utils_v2.py"
+    rsync_opts: "{{ RSYNC_EXCLUDES }}"
+    #      - "--exclude Pip*"
+    #  - "--exclude Readme.md"
+    #  - "--exclude .env"
+    #  - "--exclude list_uptimes.py"
+    #  - "--exclude location_to_restapi_app.py"
+    #  - "--exclude post_to_restapi.py"
+    #  - "--exclude telethon_utils_v2.py"
   notify:
     - "Restart {{ app_name }} app"
 
@@ -71,8 +71,19 @@
   notify:
     - "Restart {{ app_name }} app"
 
+- name: Status of systemd file
+  stat:
+    path: "/usr/lib/systemd/system/{{ app_name }}.service"
+  register: systemd_file_stat
+
+- name: Display results from previous task
+  debug:
+    var: systemd_file_stat
+    verbosity: 1
+
 - name: "{{ app_name }} app enable & start"
   become: yes
+  when: systemd_file_stat.stat.exists
   service:
     name: "{{ app_name }}"
     enabled: yes

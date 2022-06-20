@@ -1,15 +1,19 @@
 ### Description
 This repository contains ...
-* several Telegram bots using the python Telethon library
-* as well as one or more Django REST API using for posting or getting data
+* Three Telegram bots using the python Telethon library
+    * list_uptimes: which pulls data from a rest api server and displays it on a Telegram bot
+    * location_app: which logs to stdout and stderr the data from the Telegram Location widget
+    * location_to_restapi_app which posts the Telegram Location widget to a restapi server
+
+* as well as the  Django REST API which is the rest api that the third bot (above) posts to.
   to and from these bots.
 
-* The `playbooks` folder contains the ansible playbooks to install the bots and API(s) on an
+* The `playbooks` folder contains the ansible playbooks to install the bots and REST API on an
 AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro-5.9.3-17-r06-linux-debian-10-x86_64-hvm-ebs-nami-78b1d030-4c7d-4ade-b8e6-f8dc86941303" AMI
 
 #### Current State
-  * list_uptimes and location_app bots finished, including ansible playbooks
-  * 22-May-2022: Starting work on rest api for capturing live location
+  * list_uptimes, location_app, location_to_restapi_app bots finished, including ansible playbooks for installing them
+  * 22-May-2022: Starting work on rest api described above
 
 #### To Do
 * Add Ansible role for using Postgres instead of MariaDB 

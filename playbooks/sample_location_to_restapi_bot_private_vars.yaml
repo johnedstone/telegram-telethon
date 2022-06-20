@@ -15,4 +15,12 @@ API_HASH: 'api_hash'
 REST_API: 'rest_api_endpoint'
 REST_API_TOKEN: 'rest_api_token'
 
+RSYNC_EXCLUDES:
+  - "--exclude Pip*"
+  - "--exclude Readme.md"
+  - "--exclude .env"
+  - "--exclude list_uptimes.py"
+  - "--exclude location_app.py"
+  - "--exclude telethon_utils.py"
+
 # vim: ai et ts=2 sw=2 sts=2 nu
