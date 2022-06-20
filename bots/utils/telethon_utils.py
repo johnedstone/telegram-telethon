@@ -9,6 +9,7 @@ from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 
 
+# See telethon_utils_v2 for how this env variable works on the cli and then with systemd
 env_file = os.getenv('PATH_TO_ENV_FILE')
 load_dotenv(env_file)
 

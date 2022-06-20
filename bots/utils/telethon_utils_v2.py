@@ -9,8 +9,10 @@ from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 
 
-env_file = os.getenv('PATH_TO_ENV_FILE')
-load_dotenv(env_file)
+# Use this env value when running from the cli for development
+# With systemd, in production, env_file == None
+env_file = os.getenv('PATH_TO_ENV_FILE') # in production this == None
+load_dotenv(env_file) # in production, this translates to load_dotenv(None), which is really load_dotenv('.env')
 
 REST_API = os.getenv('REST_API')
 REST_API_TOKEN = os.getenv('REST_API_TOKEN')

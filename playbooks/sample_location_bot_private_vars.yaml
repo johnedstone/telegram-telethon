@@ -7,7 +7,6 @@ python_version: 'python3.7'
 
 PATH_TO_PYTHON: '/opt/bitnami/apps/location_app/venv/bin/python'
 LIVE_APP_SCRIPT: 'location_app.py'
-PATH_TO_ENV_FILE: '/opt/bitnami/apps/location_app/.env'
 
 TOKEN_LOCATION_BOT: 'token_for_location_app_bot'
 API_ID: 'api_id'
