@@ -1,4 +1,10 @@
-### Example commands
+### Running in development mode
+From this directory:
+```
+python manage.py runserver
+```
+
+### Example commands to consume data from this REST API
 #### Geolocation
 
 * __List__ (user_id randomized) geolocation data with the token that allows `can_view_randomized_data_only`
