@@ -138,11 +138,11 @@ async def handler(event):
                     username_response = patch_username(logger_log, logger_error,
                             url=response_dict['telegram_user'],
                             data={"username": username})
-                    logger_log.info(
+                    logger_log.debug(
                         f'''{username_response.status_code}, {username_response.text}''')
 
                 else:
-                    logger_log.info('username has been posted, no need to patch the username')
+                    logger_log.debug('username has been posted, no need to patch the username')
 
             else:
                 logger_error.error(f'Posting this geolocation event failed: {response.status_code} status code')
