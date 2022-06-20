@@ -1,8 +1,13 @@
 ### Running in development mode
 From this directory:
 ```
+pipenv shell
+export PATH_TO_ENV_FILE=/path/to/env/file
 python manage.py runserver
 ```
+
+### In production mode
+In production mode, the ansible playbook will install it, to be run by systemd
 
 ### Example commands to consume data from this REST API
 #### Geolocation

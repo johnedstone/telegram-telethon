@@ -14,7 +14,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Use export PATH_TO_ENV_FILE=/path/ for development
+# Use export PATH_TO_ENV_FILE=/path/to/env/file for development
+# Once installed, systemd will use .env_production, created by the ansible playbook
 env_file = os.getenv('PATH_TO_ENV_FILE', '.env_production')
 load_dotenv(env_file)
 
@@ -23,7 +24,7 @@ PROD = os.getenv('PRODUCTION') == 'yes'
 if PROD:
     print(os.getenv('PROD_SECRET_KEY'))
 else:
-    print(os.getenv('DEV_SECRET_KEY'))
+    SECRET_KEY = os.getenv('DEV_SECRET_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-or5vsr9c_myme1d61n5!5l@_v_6zj)bem)7*zp*)ngmxvnf@&w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
