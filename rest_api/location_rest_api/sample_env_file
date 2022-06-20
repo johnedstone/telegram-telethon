@@ -1,0 +1,8 @@
+PRODUCTION='no'
+#Reference: https://humberto.io/blog/tldr-generate-django-secret-key/
+#python manage.py shell
+#import secrets
+#print(secrets.token_urlsafe())
+PROD_SECRET_KEY='put-something-here'
+DEV_SECRET_KEY='django-insecure-or5vsr9c_myme1d61n5!5l@_v_6zj)bem)7*zp*)ngmxvnf@&w'
+
