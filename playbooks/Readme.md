@@ -1,6 +1,6 @@
 ### Typical ansible commands
 
-#### List uptimes bot
+#### List uptimes app (bot)
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/list_uptimes_private_vars.yaml
@@ -15,7 +15,7 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/list_uptimes_private_vars.yaml
 /usr/local/bin/ansible-playbook --diff --flush-cache --skip-tags optional_prep_work -i inventory.ini list_uptimes_playbook.yaml
 ```
 
-#### Location app bot
+#### Location app (bot)
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_app_private_vars.yaml
@@ -27,6 +27,16 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_app_private_vars.yaml
 #play
 /usr/local/bin/ansible-playbook --diff --flush-cache --tags location_app -i inventory.ini location_app_playbook.yaml
 ```
+
+#### Location_to_restapi_app (bot)
+
+```
+export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_vars.yaml
+
+#Use dry-run and play commands from above using the location_app_playbook
+
+```
+
 
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
