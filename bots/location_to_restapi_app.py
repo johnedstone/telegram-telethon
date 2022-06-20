@@ -54,10 +54,33 @@ async def handler(event):
             f' | period: {event.media.period if event.media.period else ""}'
             )
         
-        logger_log.info(msg)
-        #await event.respond(msg)
+        logger_log.debug(msg)
+        data = {
+                'telegram_user': event.peer_id.user_id,
+                'longitude': event.media.geo.long,
+                'latitude': event.media.geo.lat,
+        }
+        accuracy_radius = event.media.geo.accuracy_radius
+        if accuracy_radius:
+            data['accuracy_radius'] = accuracy_radius
 
-        # post this data - this is next
+        heading = event.media.heading
+        if heading:
+            data['heading'] = heading
+
+        period = event.media.period
+        if period:
+            data['period'] = period
+
+        try:
+            response = post_to_restapi(logger_log, logger_error, data)
+            if response.status_code == 201:
+                logger_log.debug(response.text)
+            else:
+                logger_error.error(f'Posting this geolocation event failed: {response.status_code} status code')
+        except Exception as e:
+            logger_error.warning(f'MessageEdited: posting to restapi error: {e}')
+        ##
 
 @bot.on(events.NewMessage)
 async def handler(event):
@@ -91,12 +114,12 @@ async def handler(event):
             #f' | period: {event.media.period if event.media.period else ""}'
             )
  
-        logger_log.info(msg)
+        logger_log.debug(msg)
 
         data = {
                 'telegram_user': event.peer_id.user_id,
                 'longitude': event.media.geo.long,
-                'latitude': event.media.geo.long,
+                'latitude': event.media.geo.lat,
         }
 
         accuracy_radius = event.media.geo.accuracy_radius
@@ -124,7 +147,7 @@ async def handler(event):
             else:
                 logger_error.error(f'Posting this geolocation event failed: {response.status_code} status code')
         except Exception as e:
-            logger_error.warning(f'posting to restapi error: {e}')
+            logger_error.warning(f'NewMessage: posting to restapi error: {e}')
 
     else:
         logger_log.debug('No, not a geo object')
