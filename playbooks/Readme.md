@@ -43,7 +43,7 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_va
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/geolocation_restapi_private_vars.yaml
 
 #dry-run
-/usr/local/bin/ansible-playbook --check --diff --flush-cache -i inventory.ini geolocation_restapi_playbook.yaml
+/usr/local/bin/ansible-playbook --check --diff --flush-cache -i inventory.ini [ --tags mariadb_setup | --skip-tags mariadb_setup ] geolocation_restapi_playbook.yaml
 
 
 #play

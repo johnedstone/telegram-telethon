@@ -9,6 +9,7 @@
   roles:
     - role: optional_prep_work
       tags: [optional_prep_work]
+    - role: mariadb_setup
+      tags: [mariadb_setup]
 
 # vim: ai et ts=2 sw=2 sts=2 nu
-

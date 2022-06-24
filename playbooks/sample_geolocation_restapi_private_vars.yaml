@@ -12,6 +12,15 @@ DEV_SECRET_KEY: 'your-secret-50+char-long-string-for-dev'
 
 ALLOWED_HOSTS: 'your.domain.com'
 
+database_name: 'your_database_name'
+database_user: 'your_database_user'
+database_password: 'your_database_password'
+
+# Example
+db_backup_cron_hour: '2'
+db_backup_cron_min: '10'
+db_backup_cron_weekday: '*'
+db_backup_cron_day: '28'
+db_backup_cron_disable: no
 
 # vim: ai et ts=2 sw=2 sts=2 nu
-

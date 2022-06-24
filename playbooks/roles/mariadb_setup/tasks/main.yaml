@@ -1,0 +1,42 @@
+---
+- name: create database
+  mysql_db:
+    config_file: /opt/bitnami/mariadb/conf/my.cnf
+    state: present
+    name: "{{ database_name }}"
+    collation: utf8_bin
+    encoding: utf8
+    login_password: "{{ MARIADB_ROOT_PASSWORD }}"
+    login_user: root
+
+- name: Create user with password, all database privileges and WITH GRANT OPTION for each app
+  community.mysql.mysql_user:
+    login_password: "{{ MARIADB_ROOT_PASSWORD }}"
+    login_user: root
+    state: present
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+    priv: "{{ database_name }}.*:ALL,GRANT"
+
+
+- name: Create db backup directory
+  become: yes
+  file:
+    path: '/opt/bitnami/apps/db_backups'
+    owner: bitnami
+    group: bitnami
+    mode: 0755
+    state: directory
+
+- name: create cronjob to backup database
+  cron:
+    name: "{{ database_name }} database backup"
+    hour: "{{ db_backup_cron_hour }}"
+    minute: "{{ db_backup_cron_min }}"
+    weekday: "{{ db_backup_cron_weekday }}"
+    day: "{{ db_backup_cron_day }}"
+    job: "(/opt/bitnami/mariadb/bin/mysqldump -u '{{ database_user | regex_replace('%', '\\%') }}'  --password='{{ database_password | regex_replace('%', '\\%') }}' '{{ database_name }}' | gzip  > /opt/bitnami/apps/db_backups/{{ database_name | regex_replace('%', '_') }}.backup.$(date +\\%d).sql.gz) 2>/dev/null"
+    state: present
+    disabled: "{{ db_backup_cron_disable }}"
+
+# vim: ai et ts=2 sw=2 sts=2 nu
