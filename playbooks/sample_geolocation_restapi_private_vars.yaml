@@ -1,0 +1,17 @@
+---
+HOSTNAME: 'your.domain.com'
+local_timezone: 'America/New_York'
+
+app_name: 'geolocation_restapi'
+python_version: 'python3.7'
+
+MARIADB_ROOT_PASSWORD: 'the-mariadb-or-mysql-root-password'
+PRODUCTION: 'yes'
+PROD_SECRET_KEY: 'your-secret-50+char-long-string-for-prod'
+DEV_SECRET_KEY: 'your-secret-50+char-long-string-for-dev'
+
+ALLOWED_HOSTS: 'your.domain.com'
+
+
+# vim: ai et ts=2 sw=2 sts=2 nu
+

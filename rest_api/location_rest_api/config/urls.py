@@ -15,7 +15,7 @@ router.registry.extend(telegram_user_router.registry)
 
 urlpatterns = [
     url(r'^$', lambda x: redirect('/api/v1/', permanent=False), name='home'),
-    path('geolocations-admin/', admin.site.urls),
+    path('geolocation-admin/', admin.site.urls),
     url(r'^api/v1/', include(router.urls)),
 ]
 

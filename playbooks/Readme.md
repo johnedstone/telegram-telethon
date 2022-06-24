@@ -37,6 +37,20 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_va
 
 ```
 
+#### geolocation_restapi 
+
+```
+export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/geolocation_restapi_private_vars.yaml
+
+#dry-run
+/usr/local/bin/ansible-playbook --check --diff --flush-cache -i inventory.ini geolocation_restapi_playbook.yaml
+
+
+#play
+/usr/local/bin/ansible-playbook --diff --flush-cache -i inventory.ini geolocation_restapi_playbook.yaml
+
+```
+
 
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
