@@ -1,5 +1,5 @@
 ---
-HOSTNAME: value
+HOSTNAME: 'your_server_hostname'
 local_timezone: 'America/New_York'
 
 app_name: 'location_to_restapi_app'

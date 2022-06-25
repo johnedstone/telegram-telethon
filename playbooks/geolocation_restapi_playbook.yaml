@@ -9,6 +9,8 @@
   roles:
     - role: optional_prep_work
       tags: [optional_prep_work]
+    - role: remove_default_wordpress
+      tags: [remove_default_wordpress]
     - role: mariadb_setup
       tags: [mariadb_setup]
 

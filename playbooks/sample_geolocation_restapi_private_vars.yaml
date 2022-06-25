@@ -1,5 +1,5 @@
 ---
-HOSTNAME: 'your.domain.com'
+HOSTNAME: 'your_server_hostname'
 local_timezone: 'America/New_York'
 
 app_name: 'geolocation_restapi'
