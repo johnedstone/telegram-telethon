@@ -59,6 +59,13 @@ gunicorn -b 0.0.0.0:8000 hello_world:app
 gunicorn hello_world:app
 ```
 
+#### ToDo
+* let's encyrpt
+* django install
+    * https://www.section.io/engineering-education/django-ansible-deployment/
+    * https://realpython.com/automating-django-deployments-with-fabric-and-ansible/
+    * https://www.guguweb.com/2017/05/02/how-to-deploy-a-django-project-in-15-minutes-with-ansible/
+    * https://github.com/liip/django-ansible
 
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
