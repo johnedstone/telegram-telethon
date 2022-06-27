@@ -9,7 +9,7 @@
     group: daemon
   loop:
     - "/opt/bitnami/apps/{{ app_name }}"
-    - "/var/log/gunicorn_{{ app_name }}"
+    - "/var/log/{{ app_name }}"
 
 - name: install gunicorn
   pip:
@@ -25,13 +25,15 @@
     src: files/hello_world.py
     dest: "/opt/bitnami/apps/{{ app_name }}/hello_world.py"
   notify:
+    - Restart gunicorn service
+    - Restart gunicorn socket
     - Restart bitnami apps
 
 - name: create systemd gunicorn socket file
   become: yes
   template:
     src: templates/gunicorn_socket.j2
-    dest: "/usr/lib/systemd/system/gunicorn_{{ app_name }}.socket"
+    dest: "/usr/lib/systemd/system/{{ app_name }}.socket"
   notify:
     - Restart gunicorn service
     - Restart gunicorn socket
@@ -41,7 +43,7 @@
   become: yes
   template:
     src: templates/gunicorn_service.j2
-    dest: "/usr/lib/systemd/system/gunicorn_{{ app_name }}.service"
+    dest: "/usr/lib/systemd/system/{{ app_name }}.service"
   notify:
     - Restart gunicorn service
     - Restart gunicorn socket
@@ -50,7 +52,7 @@
 - name: gunicorn enable & start
   become: yes
   service:
-    name: "gunicorn_{{ app_name }}"
+    name: "{{ app_name }}"
     enabled: yes
     state: started
   when: not ansible_check_mode
@@ -65,5 +67,11 @@
     mode: '0664'
   notify:
     - Restart bitnami apps
+
+- name: Enable logrotate for "{{ app_name }}"
+  become: yes
+  template:
+    src: logrotate.j2
+    dest: "/etc/logrotate.d/{{ app_name}}"
 
 # vim: ai et ts=2 sw=2 sts=2 nu

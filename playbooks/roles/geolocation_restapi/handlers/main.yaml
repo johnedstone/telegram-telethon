@@ -11,7 +11,7 @@
   become: yes
   listen: "Restart gunicorn socket"
   service:
-    name: "gunicorn_{{ app_name }}.socket"
+    name: "{{ app_name }}.socket"
     state: restarted
     daemon_reload: yes
   when: not ansible_check_mode
@@ -20,7 +20,7 @@
   become: yes
   listen: "Restart gunicorn service"
   service:
-    name: "gunicorn_{{ app_name }}.service"
+    name: "{{ app_name }}.service"
     state: restarted
     daemon_reload: yes
   when: not ansible_check_mode

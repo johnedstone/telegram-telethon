@@ -1,6 +1,6 @@
 [Unit]
 Description=gunicorn {{ app_name }} daemon
-Requires=gunicorn_{{ app_name }}.socket
+Requires={{ app_name }}.socket
 After=network.target
 
 [Service]
@@ -9,7 +9,7 @@ Group=daemon
 
 ExecStart=/bin/bash -c "/opt/bitnami/apps/{{ app_name }}/venv/bin/gunicorn \
     --chdir /opt/bitnami/apps/{{ app_name }} \
-    --access-logfile /var/log/gunicorn_{{ app_name }}/access.log --error-logfile /var/log/gunicorn_{{ app_name }}/error.log \
+    --access-logfile /var/log/{{ app_name }}/access.log --error-logfile /var/log/{{ app_name }}/error.log \
     {{ gunicorn_app }}"
 
 ExecReload=/bin/kill -s HUP $MAINPID

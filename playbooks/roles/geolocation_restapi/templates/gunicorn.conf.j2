@@ -37,7 +37,7 @@ server {
       # we don't want nginx trying to do something clever with
       # redirects, we set the Host: header above already.
       proxy_redirect off;
-      proxy_pass http://unix:/var/run/gunicorn_{{ app_name }}/socket;
+      proxy_pass http://unix:/var/run/{{ app_name }}/socket;
     }
 
 }
@@ -72,7 +72,7 @@ server {
       # we don't want nginx trying to do something clever with
       # redirects, we set the Host: header above already.
       proxy_redirect off;
-      proxy_pass http://unix:/var/run/gunicorn_{{ app_name }}/socket;
+      proxy_pass http://unix:/var/run/{{ app_name }}/socket;
     }
 
     #error_page 500 502 503 504 /500.html;
