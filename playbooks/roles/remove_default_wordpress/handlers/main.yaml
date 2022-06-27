@@ -1,0 +1,10 @@
+---
+- name: restart bitnami apps services
+  listen: "Restart bitnami apps"
+  become: yes
+  service:
+    name: bitnami
+    state: restarted
+  when: not ansible_check_mode
+
+# vim: ai et ts=2 sw=2 sts=2 nu

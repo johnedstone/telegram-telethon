@@ -32,4 +32,23 @@
     host_all: yes
     state: absent
 
+- name: remove original wordpress directory
+  become: yes
+  ansible.builtin.file:
+    path: /opt/bitnami/wordpress
+    state: absent
+  notify:
+    - Restart bitnami apps
+
+- name: remove orig nginx conf
+  become: yes
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf
+    - /opt/bitnami/nginx/conf/server_blocks/wordpress-https-server-block.conf
+  notify:
+    - Restart bitnami apps
+
 # vim: ai et ts=2 sw=2 sts=2 nu
