@@ -23,4 +23,12 @@ db_backup_cron_weekday: '*'
 db_backup_cron_day: '28'
 db_backup_cron_disable: no
 
+which_python: python3.7 # Example
+whereis_virtualenv: /usr/bin/virtualenv # Example
+gunicorn_app: 'hello_world:app' # for testing
+nginx_server_name: 'your.domain.name'
+
+#gunicorn_binary: 'venv/bin/gunicorn' # relative to app directory
+#gunicorn_app: 'hello_world:app' # used before production app is ready
+
 # vim: ai et ts=2 sw=2 sts=2 nu

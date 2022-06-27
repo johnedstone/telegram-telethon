@@ -1,0 +1,69 @@
+---
+- name: create app directory and related dir
+  become: yes
+  file:
+    state: directory
+    path: "{{ item }}"
+    mode: '0775'
+    owner: bitnami
+    group: daemon
+  loop:
+    - "/opt/bitnami/apps/{{ app_name }}"
+    - "/var/log/gunicorn_{{ app_name }}"
+
+- name: install gunicorn
+  pip:
+    name: gunicorn
+    virtualenv_python: "{{ which_python }}"
+    virtualenv_command: "{{ whereis_virtualenv }}"
+    virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
+  notify:
+    - Restart bitnami apps
+
+- name: install hello_world.py
+  copy:
+    src: files/hello_world.py
+    dest: "/opt/bitnami/apps/{{ app_name }}/hello_world.py"
+  notify:
+    - Restart bitnami apps
+
+- name: create systemd gunicorn socket file
+  become: yes
+  template:
+    src: templates/gunicorn_socket.j2
+    dest: "/usr/lib/systemd/system/gunicorn_{{ app_name }}.socket"
+  notify:
+    - Restart gunicorn service
+    - Restart gunicorn socket
+    - Restart bitnami apps
+
+- name: create systemd gunicorn service file
+  become: yes
+  template:
+    src: templates/gunicorn_service.j2
+    dest: "/usr/lib/systemd/system/gunicorn_{{ app_name }}.service"
+  notify:
+    - Restart gunicorn service
+    - Restart gunicorn socket
+    - Restart bitnami apps
+
+- name: gunicorn enable & start
+  become: yes
+  service:
+    name: "gunicorn_{{ app_name }}"
+    enabled: yes
+    state: started
+  when: not ansible_check_mode
+
+- name: create gunicorn nginx config
+  become: yes
+  template:
+    src: templates/gunicorn.conf.j2
+    dest: "/opt/bitnami/nginx/conf/server_blocks/{{ app_name }}.conf"
+    owner: bitnami
+    group: daemon
+    mode: '0664'
+  notify:
+    - Restart bitnami apps
+
+# vim: ai et ts=2 sw=2 sts=2 nu

@@ -37,7 +37,8 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_va
 
 ```
 
-#### geolocation_restapi 
+### geolocation_restapi
+#### ansible command(s)
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/geolocation_restapi_private_vars.yaml
@@ -49,6 +50,13 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/geolocation_restapi_private_vars.y
 #play
 /usr/local/bin/ansible-playbook --diff --flush-cache -i inventory.ini geolocation_restapi_playbook.yaml
 
+```
+
+#### Testing hello_world.py after ansible install
+```
+gunicorn -b 0.0.0.0:8000 hello_world:app
+#or simply
+gunicorn hello_world:app
 ```
 
 
