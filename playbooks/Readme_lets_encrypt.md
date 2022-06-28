@@ -9,7 +9,7 @@
     * lego_cron_install: yes
     * lego_cron_disable: yes
     * run the playbook
-        * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#manual)
+        * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#manually-installing)
     * then set ....
     * use_lets_encrypt: yes
     * lego_cron_disable: no
@@ -20,7 +20,7 @@
 sudo rm -i /opt/bitnami/apps/letsencrypt/lego
 ```
 
-#### <a id=manual></a>Manually installing the Let's Encrypt the first time
+#### <a id=manually-installing></a>Manually installing the Let's Encrypt the first time
 See above for the sequence
 ```
 sudo /opt/bitnami/apps/letsencrypt/lego --path /opt/bitnami/apps/letsencrypt --http --http.webroot /opt/bitnami/apps/acme_validation --domains "www.xyz.net"  --email 'johndoe@johndoe.com' run --preferred-chain 'ISRG Root X1'
