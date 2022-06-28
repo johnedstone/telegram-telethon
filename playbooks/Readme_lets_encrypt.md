@@ -9,7 +9,7 @@
     * lego_cron_install: yes
     * lego_cron_disable: yes
     * run the playbook
-        * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#### Manually installing the Let's Encrypt the first time)
+        * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#Manually installing the Let's Encrypt the first time)
     * then set ....
     * use_lets_encrypt: yes
     * lego_cron_disable: no
