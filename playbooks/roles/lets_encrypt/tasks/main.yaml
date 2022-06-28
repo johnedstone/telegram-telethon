@@ -9,6 +9,16 @@
     group: root
   when: install_lego
 
+- name: create letsencrypt acme_validation directory
+  become: yes
+  file:
+    state: directory
+    path: "/opt/bitnami/apps/acme_validation/"
+    mode: "0775"
+    owner: bitnami
+    group: daemon
+  when: install_lego
+
 - name: confirm certs directory permissions
   become: yes
   file:
@@ -17,6 +27,12 @@
     mode: "0600"
     owner: root
     group: root
+
+- name: set cron shell
+  cron:
+    name: SHELL
+    env: yes
+    value: /usr/bin/bash
 
 - name: install lego cron renew
   cron:
@@ -63,5 +79,8 @@
   script: scripts/install_lego.sh
   args:
     creates: /opt/bitnami/apps/letsencrypt/lego
+  when: install_lego
+  notify:
+    - Restart bitnami apps
 
 # vim: ai et ts=2 sw=2 sts=2 nu

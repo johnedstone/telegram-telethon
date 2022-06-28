@@ -28,7 +28,13 @@ whereis_virtualenv: /usr/bin/virtualenv # Example
 gunicorn_app: 'hello_world:app' # for testing
 nginx_server_name: 'your.domain.name'
 
-#gunicorn_binary: 'venv/bin/gunicorn' # relative to app directory
-#gunicorn_app: 'hello_world:app' # used before production app is ready
+install_lego: yes
+use_lets_encrypt: no
+lego_cron_install: yes
+lego_cron_disable: yes 
+lego_cron_hour: 2
+lego_cron_min: 10
+lego_cron_weekday: 6
+lego_email: 'someemail@somewhere.com'
 
 # vim: ai et ts=2 sw=2 sts=2 nu
