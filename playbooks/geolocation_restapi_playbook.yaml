@@ -13,7 +13,7 @@
       tags: [remove_default_wordpress]
     - role: mariadb_setup
       tags: [mariadb_setup]
-    - role: geolocation_restapi
-      tags: [geolocation_restapi]
+    - role: prep_geolocation_restapi
+      tags: [prep_geolocation_restapi]
 
 # vim: ai et ts=2 sw=2 sts=2 nu
