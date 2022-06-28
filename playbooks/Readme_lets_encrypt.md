@@ -3,13 +3,15 @@
 * This playbook will install lego and the cronjobs to renew the Let's Encrypt certs 
 * `private_vars.yaml` allows one to use the server certs or Let's Encrypt certs
 * Here is the sequence:
+    * set ....
     * install_lego: yes
     * use_lets_encrypt: no
     * lego_cron_install: yes
     * lego_cron_disable: yes
     * run the playbook
-        * The Let's Encrypt certs must be manually installed the first time for each domain as described below
-    * set use_lets_encrypt: yes
+        * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#### Manually installing the Let's Encrypt the first time)
+    * then set ....
+    * use_lets_encrypt: yes
     * lego_cron_disable: no
     * rerun the playbook
 
