@@ -1,0 +1,67 @@
+---
+- name: create letsencrypt directory
+  become: yes
+  file:
+    state: directory
+    path: "/opt/bitnami/apps/letsencrypt"
+    mode: "0750"
+    owner: root
+    group: root
+  when: install_lego
+
+- name: confirm certs directory permissions
+  become: yes
+  file:
+    state: directory
+    path: /opt/bitnami/nginx/conf/bitnami/certs
+    mode: "0600"
+    owner: root
+    group: root
+
+- name: install lego cron renew
+  cron:
+    name: "{{ app_name }} lego renew"
+    hour: "{{ lego_cron_hour }}"
+    minute: "{{ lego_cron_min }}"
+    weekday: "{{ lego_cron_weekday }}"
+    job: "sudo /opt/bitnami/apps/letsencrypt/lego --path /opt/bitnami/apps/letsencrypt --http --http.webroot /opt/bitnami/apps/acme_validation --domains {{ nginx_server_name }}  --email '{{ lego_email }}' renew --preferred-chain 'ISRG Root X1' --renew-hook '/opt/bitnami/nginx/sbin/nginx -s reload' >/dev/null 2>&1"
+    state: present
+    disabled: "{{ lego_cron_disable }}"
+
+- name: find exisitng lego crt and key file
+  become: yes
+  register: cert_files
+  find:
+    file_type: file
+    path: /opt/bitnami/apps/letsencrypt/certificates
+    patterns: '*.crt,*.key'
+    excludes: '*issuer*'
+
+#- name: display cert files
+#  debug:
+#    var: cert_files
+
+- name: Create symlinks to /opt/bitnami/apps/letsencrypt/certificates
+  become: yes
+  file:
+    src: "{{ item.path }}"
+    path: "/opt/bitnami/nginx/conf/bitnami/certs/{{ item.path | basename }}"
+    state: link
+  with_items: "{{ cert_files.files }}"
+
+- name: remove tmp lego glob files
+  become: yes
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_fileglob:
+    - '/tmp/lego*'
+  when: install_lego
+
+- name: install lego binary if it does not exist
+  become: yes
+  script: scripts/install_lego.sh
+  args:
+    creates: /opt/bitnami/apps/letsencrypt/lego
+
+# vim: ai et ts=2 sw=2 sts=2 nu
