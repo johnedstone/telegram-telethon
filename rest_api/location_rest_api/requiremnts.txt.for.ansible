@@ -1,0 +1,11 @@
+django
+djangorestframework
+httpie
+coreapi
+pyyaml
+pymysql
+whitenoise
+django-filter
+django-rest-framework
+python-dotenv
+mysqlclient
