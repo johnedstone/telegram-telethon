@@ -5,15 +5,15 @@
 * Here is the sequence:
     * set ....
     * install_lego: yes
-    * use_lets_encrypt: no
+    * use_letsencrypt: no
     * lego_cron_install: yes
     * lego_cron_disable: yes
     * run the playbook
         * The Let's Encrypt certs must then be manually installed the first time for each domain as [described below](#manually-installing)
     * then set ....
-    * use_lets_encrypt: yes
+    * use_letsencrypt: yes
     * lego_cron_disable: no
-    * rerun the playbook
+    * rerun the playbook: make sure to include at least `--tags prep_geolocation_restapi,lets_encrypt`
 
 * To update lego, simply remove `/opt/bitnami/letsencrypt/apps/lego` and rerun the playbook.
 ```
@@ -25,7 +25,7 @@ See above for the sequence
 ```
 sudo /opt/bitnami/apps/letsencrypt/lego --path /opt/bitnami/apps/letsencrypt --http --http.webroot /opt/bitnami/apps/acme_validation --domains "www.xyz.net"  --email 'johndoe@johndoe.com' run --preferred-chain 'ISRG Root X1'
 
-# After certs are in place, update private_vars.yaml to 'use_lets_encrypt: yes' and 'lego_cron_disable: no' and rerun playbook
+# After certs are in place, update private_vars.yaml to 'use_letsencrypt: yes' and 'lego_cron_disable: no' and rerun playbook
 # This will restart bitnami.service. Check playbook output to confirm the certs are configured correctly
 
 ```

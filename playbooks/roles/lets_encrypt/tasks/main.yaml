@@ -52,6 +52,7 @@
     path: /opt/bitnami/apps/letsencrypt/certificates
     patterns: '*.crt,*.key'
     excludes: '*issuer*'
+  when: use_letsencrypt
 
 #- name: display cert files
 #  debug:
@@ -64,6 +65,7 @@
     path: "/opt/bitnami/nginx/conf/bitnami/certs/{{ item.path | basename }}"
     state: link
   with_items: "{{ cert_files.files }}"
+  when: use_letsencrypt
 
 - name: remove tmp lego glob files
   become: yes
@@ -81,6 +83,6 @@
     creates: /opt/bitnami/apps/letsencrypt/lego
   when: install_lego
   notify:
-    - Restart bitnami apps
+    - "lets_encrypt:Restart bitnami apps"
 
 # vim: ai et ts=2 sw=2 sts=2 nu

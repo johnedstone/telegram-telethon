@@ -18,16 +18,16 @@
     virtualenv_command: "{{ whereis_virtualenv }}"
     virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
   notify:
-    - Restart bitnami apps
+    - "prep_geolocation_restapi:Restart bitnami apps"
 
 - name: install hello_world.py
   copy:
     src: files/hello_world.py
     dest: "/opt/bitnami/apps/{{ app_name }}/hello_world.py"
   notify:
-    - Restart gunicorn service
-    - Restart gunicorn socket
-    - Restart bitnami apps
+    - "prep_geolocation_restapi:Restart gunicorn service"
+    - "prep_geolocation_restapi:Restart gunicorn socket"
+    - "prep_geolocation_restapi:Restart bitnami apps"
 
 - name: create systemd gunicorn socket file
   become: yes
@@ -35,9 +35,9 @@
     src: templates/gunicorn_socket.j2
     dest: "/usr/lib/systemd/system/{{ app_name }}.socket"
   notify:
-    - Restart gunicorn service
-    - Restart gunicorn socket
-    - Restart bitnami apps
+    - "prep_geolocation_restapi:Restart gunicorn service"
+    - "prep_geolocation_restapi:Restart gunicorn socket"
+    - "prep_geolocation_restapi:Restart bitnami apps"
 
 - name: create systemd gunicorn service file
   become: yes
@@ -45,9 +45,9 @@
     src: templates/gunicorn_service.j2
     dest: "/usr/lib/systemd/system/{{ app_name }}.service"
   notify:
-    - Restart gunicorn service
-    - Restart gunicorn socket
-    - Restart bitnami apps
+    - "prep_geolocation_restapi:Restart gunicorn service"
+    - "prep_geolocation_restapi:Restart gunicorn socket"
+    - "prep_geolocation_restapi:Restart bitnami apps"
 
 - name: gunicorn enable & start
   become: yes

@@ -17,6 +17,7 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
 #### To Do
 * Add Ansible role for using Postgres instead of MariaDB 
 * Fix playbook so handlers is not repeated for each role
+* Rerun geolocation playbook on a fresh install to check for bugs
 
 ### Related Readme's
 * Readme_initial_setup.md

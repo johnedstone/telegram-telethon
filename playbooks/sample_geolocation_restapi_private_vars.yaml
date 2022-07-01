@@ -29,7 +29,7 @@ gunicorn_app: 'hello_world:app' # for testing
 nginx_server_name: 'your.domain.name'
 
 install_lego: yes
-use_lets_encrypt: no
+use_letsencrypt: no
 lego_cron_install: yes
 lego_cron_disable: yes 
 lego_cron_hour: 2
