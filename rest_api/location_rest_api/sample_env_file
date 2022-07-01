@@ -9,3 +9,8 @@ DEV_SECRET_KEY='django-insecure-or5vsr9c_myme1d61n5!5l@_v_6zj)bem)7*zp*)ngmxvnf@
 
 ALLOWED_HOSTS='your.domain.com'
 
+# If PRODUCTION='yes'
+mariadb_name='db_name'
+mariadb_user='db_user'
+mariadb_password='db_passwd'
+

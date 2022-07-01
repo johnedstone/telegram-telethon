@@ -15,6 +15,7 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
   * 22-May-2022: Starting work on rest api described above
 
 #### To Do
+* Clean up ansible playbook for geolocations so nameing is consistent (location/geolocation)
 * Add Ansible role for using Postgres instead of MariaDB 
 * Fix playbook so handlers is not repeated for each role
 * Rerun geolocation playbook on a fresh install to check for bugs

@@ -3,7 +3,7 @@
   mysql_db:
     config_file: /opt/bitnami/mariadb/conf/my.cnf
     state: present
-    name: "{{ database_name }}"
+    name: "{{ mariadb_name }}"
     collation: utf8_bin
     encoding: utf8
     login_password: "{{ MARIADB_ROOT_PASSWORD }}"
@@ -14,9 +14,9 @@
     login_password: "{{ MARIADB_ROOT_PASSWORD }}"
     login_user: root
     state: present
-    name: "{{ database_user }}"
-    password: "{{ database_password }}"
-    priv: "{{ database_name }}.*:ALL,GRANT"
+    name: "{{ mariadb_user }}"
+    password: "{{ mariadb_password }}"
+    priv: "{{ mariadb_name }}.*:ALL,GRANT"
 
 
 - name: Create db backup directory
@@ -30,13 +30,24 @@
 
 - name: create cronjob to backup database
   cron:
-    name: "{{ database_name }} database backup"
+    name: "{{ mariadb_name }} database backup"
     hour: "{{ db_backup_cron_hour }}"
     minute: "{{ db_backup_cron_min }}"
     weekday: "{{ db_backup_cron_weekday }}"
     day: "{{ db_backup_cron_day }}"
-    job: "(/opt/bitnami/mariadb/bin/mysqldump -u '{{ database_user | regex_replace('%', '\\%') }}'  --password='{{ database_password | regex_replace('%', '\\%') }}' '{{ database_name }}' | gzip  > /opt/bitnami/apps/db_backups/{{ database_name | regex_replace('%', '_') }}.backup.$(date +\\%d).sql.gz) 2>/dev/null"
+    job: "(/opt/bitnami/mariadb/bin/mysqldump -u '{{ mariadb_user | regex_replace('%', '\\%') }}'  --password='{{ mariadb_password | regex_replace('%', '\\%') }}' '{{ mariadb_name }}' | gzip  > /opt/bitnami/apps/db_backups/{{ mariadb_name | regex_replace('%', '_') }}.backup.$(date +\\%d).sql.gz) 2>/dev/null"
     state: present
     disabled: "{{ db_backup_cron_disable }}"
+
+- name: install required apt packages for django
+  become: yes
+  apt:
+    pkg:
+    - python3-dev
+    - default-libmysqlclient-dev
+    - build-essential
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
 
 # vim: ai et ts=2 sw=2 sts=2 nu
