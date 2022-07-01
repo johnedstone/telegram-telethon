@@ -1,0 +1,23 @@
+---
+- name: Rsync django files
+  synchronize:
+    src: "../rest_api/location_rest_api/"
+    dest: "/opt/bitnami/apps/{{ app_name }}/"
+    archive: no
+    perms: yes
+    checksum: yes
+    recursive: yes
+    group: yes
+    owner: yes
+    links: yes
+    rsync_opts:
+      - "--exclude Pip*"
+      - "--exclude Readme.md"
+      - "--exclude db.sqlite3"
+      - "--exclude drf_*"
+      - "--exclude sample_env*"
+      - "--exclude migrations"
+  notify:
+    - "Restart {{ app_name }} app"
+
+# vim: ai et ts=2 sw=2 sts=2 nu
