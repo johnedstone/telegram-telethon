@@ -72,8 +72,8 @@ async def handler(event):
         """Not sure of the diffence:
 
         await bot.send_message(event.chat_id, "Thanks, we know where you are!")
-        """
         await event.respond("Thanks, we know where you are!")
+        """
 
         msg = (
             #f'{utils.get_display_name(user)}'
@@ -87,7 +87,7 @@ async def handler(event):
             )
  
         logger_log.info(msg)
-        #await event.respond(msg)
+        await event.respond(msg)
     else:
         logger_log.debug('No, not a geo object')
         logger_log.debug(f'event: {event}')

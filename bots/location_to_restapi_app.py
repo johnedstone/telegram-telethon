@@ -100,8 +100,8 @@ async def handler(event):
         """Not sure of the diffence:
 
         await bot.send_message(event.chat_id, "Thanks, we know where you are!")
-        """
         await event.respond("Thanks, we know where you are!")
+        """
 
         msg = (
             #f'{utils.get_display_name(user)}'
@@ -115,6 +115,7 @@ async def handler(event):
             )
  
         logger_log.debug(msg)
+        await event.respond(msg)
 
         data = {
                 'telegram_user': event.peer_id.user_id,
