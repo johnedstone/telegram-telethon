@@ -81,6 +81,11 @@ server {
     #  root /path/to/app/current/public;
     #}
 
+    location ^~ /.well-known {
+        allow all;
+        root /opt/bitnami/apps/acme_validation;
+    }
+
 }
 
 # vim: ai et ts=4 sw=4 sts=4 nu
