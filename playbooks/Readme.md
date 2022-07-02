@@ -38,7 +38,13 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_va
 ```
 
 ### geolocation_restapi
-#### ansible command(s)
+#### Notes for post ansible install
+* create user that has the permission to post geolocation:Call post geolocation
+* create user that has the permission to post geolocation:Can view all data
+* create user that has the permission to post geolocation:Can view randomized data only
+* Consider using groups with these permissions and adding the user(s) to the appropriate group
+
+#### ansible command(s) for installing
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/geolocation_restapi_private_vars.yaml

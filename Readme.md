@@ -11,8 +11,13 @@ This repository contains ...
 AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro-5.9.3-17-r06-linux-debian-10-x86_64-hvm-ebs-nami-78b1d030-4c7d-4ade-b8e6-f8dc86941303" AMI
 
 #### Current State
-  * list_uptimes, location_app, location_to_restapi_app bots finished, including ansible playbooks for installing them
-  * 01-Jul-2022: Ansible install for geolocation_restapi completed
+* list_uptimes, location_app, location_to_restapi_app bots finished, including ansible playbooks for installing them
+* 01-Jul-2022: Ansible install for geolocation_restapi completed
+
+#### Currently Running
+* list_uptimes app
+* location_to_restapi app which is talking to (below)
+* geolocation_restapi
 
 #### To Do
 * Clean up ansible playbook for geolocations so nameing is consistent (location/geolocation)

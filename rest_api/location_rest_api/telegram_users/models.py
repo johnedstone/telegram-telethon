@@ -43,7 +43,7 @@ class TelegramUser(TimeStampMixin):
     class Meta:
         ordering = ['created_at']
 
-    user_id = models.PositiveIntegerField('user_id', unique=True, blank=False)
+    user_id = models.BigIntegerField('user_id', unique=True, blank=False)
     username = models.CharField('username', max_length=50,
             blank=True, default='')
     randomized_id = models.CharField('randomized id', max_length=50,
