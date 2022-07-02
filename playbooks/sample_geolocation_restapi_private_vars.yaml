@@ -34,6 +34,7 @@ which_python: python3.7 # Example
 whereis_virtualenv: /usr/bin/virtualenv # Example
 gunicorn_app: 'hello_world:app' # for testing
 #gunicorn_app: 'config.wsgi' # for production
+gunicorn_workers: 3 # See Readme.md here for discussion on gunicorn_workers with ec2
 nginx_server_name: 'your.domain.name'
 
 install_lego: yes

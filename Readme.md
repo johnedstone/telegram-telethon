@@ -16,8 +16,8 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
 
 #### Currently Running
 * list_uptimes app
-* location_to_restapi app which is talking to (below)
-* geolocation_restapi
+* location_to_restapi app which is talking to ... 
+* ... geolocation_restapi
 
 #### To Do
 * Clean up ansible playbook for geolocations so nameing is consistent (location/geolocation)

@@ -16,6 +16,7 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/list_uptimes_private_vars.yaml
 ```
 
 #### Location app (bot)
+This playbook is used for for this app as well as Location_to_restapi_app.
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_app_private_vars.yaml
@@ -29,6 +30,7 @@ export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_app_private_vars.yaml
 ```
 
 #### Location_to_restapi_app (bot)
+Same playbook as for the Location app (above), only the private_vars is different.
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_vars.yaml
@@ -69,6 +71,11 @@ gunicorn hello_world:app
 * actual geolocation project
     * rsync files exclude migrations
     * run migrations
+
+### Thinking about number of gunicorn workers
+* reference: https://dev.to/kokospapa8/gunicorn-performance-analysis-on-aws-ec2-28jl
+* For EC2 T3 with 2cpu and 1G: workers either 3 or 5.  02-Jul-2022: --worker 3
+
 #### Django install: other examples
     * https://www.section.io/engineering-education/django-ansible-deployment/
     * https://realpython.com/automating-django-deployments-with-fabric-and-ansible/

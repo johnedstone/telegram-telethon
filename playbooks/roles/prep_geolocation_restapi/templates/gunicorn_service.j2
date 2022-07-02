@@ -8,6 +8,7 @@ User=bitnami
 Group=daemon
 
 ExecStart=/bin/bash -c "/opt/bitnami/apps/{{ app_name }}/venv/bin/gunicorn \
+    --workers {{ gunicorn_workers | default(1, true) }} \
     --chdir /opt/bitnami/apps/{{ app_name }} \
     --access-logfile /var/log/{{ app_name }}/access.log --error-logfile /var/log/{{ app_name }}/error.log \
     {{ gunicorn_app }}"
