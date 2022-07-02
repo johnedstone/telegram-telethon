@@ -70,12 +70,29 @@
       - migrate
   register: migrate
   changed_when: "'No migrations to apply' not in migrate.stdout"
+  notify:
+    - "Restart {{ app_name }} app"
 
 - name: Print migrate msg
   ansible.builtin.debug:
     var: migrate
+
+- name: collect static files
+  ansible.builtin.command:
+    chdir: "/opt/bitnami/apps/{{ app_name }}"
+    argv:
+      - "/opt/bitnami/apps/{{ app_name }}/venv/bin/python"
+      - manage.py
+      - collectstatic
+      - --no-input
+  register: staticfiles
+  changed_when: "'0 static files copied to' not in staticfiles.stdout"
   notify:
     - "Restart {{ app_name }} app"
+
+- name: Print collectstatic msg
+  ansible.builtin.debug:
+    var: staticfiles
 
 - name: create superuser
   ansible.builtin.command:
