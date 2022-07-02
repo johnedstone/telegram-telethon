@@ -12,7 +12,7 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
 
 #### Current State
   * list_uptimes, location_app, location_to_restapi_app bots finished, including ansible playbooks for installing them
-  * 22-May-2022: Starting work on rest api described above
+  * 01-Jul-2022: Ansible install for geolocation_restapi completed
 
 #### To Do
 * Clean up ansible playbook for geolocations so nameing is consistent (location/geolocation)

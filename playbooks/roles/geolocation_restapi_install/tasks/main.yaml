@@ -20,4 +20,82 @@
   notify:
     - "Restart {{ app_name }} app"
 
+- name: Install environment variables
+  template:
+    src: env.j2
+    dest: "/opt/bitnami/apps/{{ app_name }}/.env_production"
+    owner: bitnami
+    group: bitnami
+    mode: 0600
+  notify:
+    - "Restart {{ app_name }} app"
+
+- name: install pip requirements.txt
+  ansible.builtin.pip:
+    virtualenv_python: "{{ which_python }}"
+    virtualenv_command: "{{ whereis_virtualenv }}"
+    virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
+    requirements: "/opt/bitnami/apps/{{ app_name }}/requirements.txt.for.ansible"
+    extra_args: --upgrade
+  notify:
+    - "Restart {{ app_name }} app"
+  register: pip_output
+
+- name:
+  ansible.builtin.debug:
+    var: pip_output
+
+- name: make migrations
+  ansible.builtin.command:
+    chdir: "/opt/bitnami/apps/{{ app_name }}"
+    argv:
+      - "/opt/bitnami/apps/{{ app_name }}/venv/bin/python"
+      - manage.py
+      - makemigrations
+      - "{{ item }}"
+  register: make_migrations
+  loop: "{{ makemigration_apps }}"
+  changed_when: "'No changes detected in app' not in make_migrations.stdout"
+
+- name: Print make migrations msg
+  ansible.builtin.debug:
+    var: make_migrations
+
+- name: make migrate
+  ansible.builtin.command:
+    chdir: "/opt/bitnami/apps/{{ app_name }}"
+    argv:
+      - "/opt/bitnami/apps/{{ app_name }}/venv/bin/python"
+      - manage.py
+      - migrate
+  register: migrate
+  changed_when: "'No migrations to apply' not in migrate.stdout"
+
+- name: Print migrate msg
+  ansible.builtin.debug:
+    var: migrate
+  notify:
+    - "Restart {{ app_name }} app"
+
+- name: create superuser
+  ansible.builtin.command:
+    chdir: "/opt/bitnami/apps/{{ app_name }}"
+    argv:
+      - "/opt/bitnami/apps/{{ app_name }}/venv/bin/python"
+      - manage.py
+      - shell
+      - -c
+      - "from django.contrib.auth.models import User;print('exists') if User.objects.filter(username='{{ superuser_username }}') else User.objects.create_superuser(username='{{ superuser_username }}',email='{{ superuser_email }}',password='{{ superuser_password }}')"
+  register: superuser
+  changed_when: "'exists' not in superuser.stdout"
+  tags:
+    - create_superuser
+
+- name: Print superuser msg
+  ansible.builtin.debug:
+    var: superuser
+    verbosity: 1
+  tags:
+    - create_superuser
+
 # vim: ai et ts=2 sw=2 sts=2 nu

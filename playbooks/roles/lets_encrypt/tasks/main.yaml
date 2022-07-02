@@ -83,6 +83,6 @@
     creates: /opt/bitnami/apps/letsencrypt/lego
   when: install_lego
   notify:
-    - "lets_encrypt:Restart bitnami apps"
+    - "Restart bitnami apps"
 
 # vim: ai et ts=2 sw=2 sts=2 nu

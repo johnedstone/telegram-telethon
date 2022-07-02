@@ -12,9 +12,16 @@ DEV_SECRET_KEY: 'your-secret-50+char-long-string-for-dev'
 
 ALLOWED_HOSTS: 'your.domain.com'
 
-database_name: 'your_database_name'
-database_user: 'your_database_user'
-database_password: 'your_database_password'
+mariadb_name: 'your_database_name'
+mariadb_user: 'your_database_user'
+mariadb_password: 'your_database_password'
+makemigration_apps:
+  - geolocations
+  - telegram_users
+
+superuser_username: 'django_superuser'
+superuser_email: 'django_superuser_email'
+superuser_password: 'superuser_password'
 
 # Example
 db_backup_cron_hour: '2'
@@ -26,6 +33,7 @@ db_backup_cron_disable: no
 which_python: python3.7 # Example
 whereis_virtualenv: /usr/bin/virtualenv # Example
 gunicorn_app: 'hello_world:app' # for testing
+#gunicorn_app: 'config.wsgi' # for production
 nginx_server_name: 'your.domain.name'
 
 install_lego: yes

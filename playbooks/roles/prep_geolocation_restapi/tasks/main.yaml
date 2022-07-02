@@ -1,5 +1,16 @@
 ---
-- name: create app directory and related dir
+- name: create app directory
+  become: yes
+  file:
+    state: directory
+    path: "{{ item }}"
+    mode: '0755'
+    owner: bitnami
+    group: bitnami
+  loop:
+    - "/opt/bitnami/apps/{{ app_name }}"
+
+- name: create app directory log dir
   become: yes
   file:
     state: directory
@@ -8,7 +19,6 @@
     owner: bitnami
     group: daemon
   loop:
-    - "/opt/bitnami/apps/{{ app_name }}"
     - "/var/log/{{ app_name }}"
 
 - name: install gunicorn
@@ -17,17 +27,18 @@
     virtualenv_python: "{{ which_python }}"
     virtualenv_command: "{{ whereis_virtualenv }}"
     virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
+    extra_args: "--upgrade"
   notify:
-    - "prep_geolocation_restapi:Restart bitnami apps"
+    - "Restart bitnami apps"
 
 - name: install hello_world.py
   copy:
     src: files/hello_world.py
     dest: "/opt/bitnami/apps/{{ app_name }}/hello_world.py"
   notify:
-    - "prep_geolocation_restapi:Restart gunicorn service"
-    - "prep_geolocation_restapi:Restart gunicorn socket"
-    - "prep_geolocation_restapi:Restart bitnami apps"
+    - "Restart gunicorn service"
+    - "Restart gunicorn socket"
+    - "Restart bitnami apps"
 
 - name: create systemd gunicorn socket file
   become: yes
@@ -35,9 +46,9 @@
     src: templates/gunicorn_socket.j2
     dest: "/usr/lib/systemd/system/{{ app_name }}.socket"
   notify:
-    - "prep_geolocation_restapi:Restart gunicorn service"
-    - "prep_geolocation_restapi:Restart gunicorn socket"
-    - "prep_geolocation_restapi:Restart bitnami apps"
+    - "Restart gunicorn service"
+    - "Restart gunicorn socket"
+    - "Restart bitnami apps"
 
 - name: create systemd gunicorn service file
   become: yes
@@ -45,9 +56,9 @@
     src: templates/gunicorn_service.j2
     dest: "/usr/lib/systemd/system/{{ app_name }}.service"
   notify:
-    - "prep_geolocation_restapi:Restart gunicorn service"
-    - "prep_geolocation_restapi:Restart gunicorn socket"
-    - "prep_geolocation_restapi:Restart bitnami apps"
+    - "Restart gunicorn service"
+    - "Restart gunicorn socket"
+    - "Restart bitnami apps"
 
 - name: gunicorn enable & start
   become: yes
