@@ -20,8 +20,8 @@ AWS EC2 instance running Nginx and MariaDB, e.g a t3.micro "bitnami-wordpresspro
 * ... geolocation_restapi
 
 #### To Do
-* Clean up ansible playbook for geolocations so nameing is consistent (location/geolocation)
-* Add Ansible role for using Postgres instead of MariaDB 
+* Clean up ansible playbook for geolocations so naming is consistent (location/geolocation)
+* Add Ansible role for using Postgres instead of MariaDB - note: 11-Jul added postgres role
 * Fix playbook so handlers is not repeated for each role
 * Rerun geolocation playbook on a fresh install to check for bugs
 * Deal with pip --update not being idempotent
