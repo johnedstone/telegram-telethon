@@ -1,0 +1,60 @@
+---
+#References:
+#    https://raturi.in/blog/setup-python3-django-nginx-gunicorn-and-postgresql/
+#    https://medium.com/splunkuserdeveloperadministrator/creating-postgresql-database-with-ansible-da65878b782f
+#    https://github.com/ProfessorKazarinoff/ansible-django/blob/master/create_database.yml
+
+
+- name: install required apt packages for PostgresSQL
+  become: yes
+  apt:
+    pkg:
+    - libpq-dev
+    - postgresql
+    - postgresql-contrib
+    - python3-psycopg2
+    - build-essential  #optional
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+  tags:
+    - postgres_initial_play
+
+- name: Create a new database with name {{ db_name }}
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: "{{ db_name }}"
+
+- name: Ensure user has access to {{ db_name }}
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+
+- name: GRANT ALL PRIVILEGES ON DATABASE {{ db_name }} TO {{ db_user }}
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_privs:
+    db: "{{ db_name }}"
+    privs: ALL
+    type: database
+    role: "{{ db_user }}"
+    fail_on_role: no
+
+- name: Create alter roles script
+  template:
+    src: alter_roles_sql.j2
+    dest: /tmp/alter_roles.sql
+
+- name: ALTER ROLE {{ db_user }} ...
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_script:
+    db: postgres
+    path: /tmp/alter_roles.sql
+  changed_when: 2 == 3 # this is always executed
+ 
+# vim: ai et ts=2 sw=2 sts=2 nu
