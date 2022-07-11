@@ -49,8 +49,6 @@
     src: alter_roles_sql.j2
     dest: /tmp/alter_roles.sql
 
-#To do: run this script, to first check
-#echo 'show client_encoding;show timezone;show default_transaction_isolation;' |psql -U {{ db_user }} -d {{ db_name }} -W -h 127.0.0.1
 - name: ALTER ROLE {{ db_user }} client_encoding, ... runs everytime
   become: true
   become_user: postgres
@@ -60,7 +58,7 @@
   register: alter_role
   changed_when: 2 == 3 # this is always executed
 
-- name:
+- name: show alter_role.sql status
   debug:
     var: alter_role.statusmessage
  
