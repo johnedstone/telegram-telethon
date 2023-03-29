@@ -4,7 +4,7 @@
     rotate 5
     compress
     notifempty
-    create 0660 bitnami daemon
+    create 0750 bitnami daemon
     sharedscripts
     postrotate
        /usr/bin/systemctl restart {{ app_name }}.service {{ app_name }}.socket

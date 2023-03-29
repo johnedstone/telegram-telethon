@@ -15,7 +15,7 @@
   file:
     state: directory
     path: "{{ item }}"
-    mode: '0775'
+    mode: '0750'
     owner: bitnami
     group: daemon
   loop:
