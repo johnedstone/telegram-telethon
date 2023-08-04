@@ -35,7 +35,8 @@ def format_dict(result_dict):
                 break
         results = results + '\n'
 
-    return results
+    # max telegram len is 4096
+    return results[:4096-128]
 
 def get_uptime_report():
     """query the REST API"""
