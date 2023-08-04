@@ -31,7 +31,7 @@ def format_dict(result_dict):
         for ea_ea in result_dict[ea]:
             results = results + '  {}\n'.format(ea_ea)
             counter += 1
-            if counter == 4:
+            if counter == 1:
                 break
         results = results + '\n'
 
