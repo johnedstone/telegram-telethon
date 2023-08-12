@@ -30,7 +30,7 @@ async def get_username(user_id):
     return username
 
 @bot.on(events.MessageEdited)
-async def handler(event):
+async def edited_handler(event):
     if event.geo:
         logger_log.debug('Yes, an updated geo object')
 
@@ -47,8 +47,8 @@ async def handler(event):
         msg = (
             #f'{utils.get_display_name(user)}'
             #f' | {event.edit_date} | '
+            f'{event.media.geo.lat},'
             f'{event.media.geo.long}'
-            f' | {event.media.geo.lat}'
             f' | accuracy radius: {event.media.geo.accuracy_radius if event.media.geo.accuracy_radius else ""}'
             f' | heading: {event.media.heading if event.media.heading else ""}'
             f' | period: {event.media.period if event.media.period else ""}'
@@ -83,7 +83,7 @@ async def handler(event):
         ##
 
 @bot.on(events.NewMessage)
-async def handler(event):
+async def new_handler(event):
     if event.geo:
         logger_log.debug('Yes, a geo object')
 
@@ -106,8 +106,8 @@ async def handler(event):
         msg = (
             #f'{utils.get_display_name(user)}'
             #f' | {event.edit_date} | '
+            f'{event.media.geo.lat},'
             f'{event.media.geo.long}'
-            f' | {event.media.geo.lat}'
             f' | accuracy radius: {event.media.geo.accuracy_radius if event.media.geo.accuracy_radius else ""}'
             ## Sometimes this is absent in the MessageMediaGeo
             #f' | heading: {event.media.heading if event.media.heading else ""}'

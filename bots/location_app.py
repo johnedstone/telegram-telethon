@@ -27,7 +27,7 @@ async def handler(event):
 
 
 @bot.on(events.MessageEdited)
-async def handler(event):
+async def edited_handler(event):
     if event.geo:
         logger_log.debug('Yes, an updated geo object')
 
@@ -44,8 +44,8 @@ async def handler(event):
         msg = (
             #f'{utils.get_display_name(user)}'
             #f' | {event.edit_date} | '
+            f'{event.media.geo.lat},'
             f'{event.media.geo.long}'
-            f' | {event.media.geo.lat}'
             f' | accuracy radius: {event.media.geo.accuracy_radius if event.media.geo.accuracy_radius else ""}'
             f' | heading: {event.media.heading if event.media.heading else ""}'
             f' | period: {event.media.period if event.media.period else ""}'
@@ -55,7 +55,7 @@ async def handler(event):
         #await event.respond(msg)
 
 @bot.on(events.NewMessage)
-async def handler(event):
+async def new_handler(event):
     if event.geo:
         logger_log.debug('Yes, a geo object')
 
@@ -72,14 +72,14 @@ async def handler(event):
         """Not sure of the diffence:
 
         await bot.send_message(event.chat_id, "Thanks, we know where you are!")
-        await event.respond("Thanks, we know where you are!")
         """
+        await event.respond("Thanks, we know where you are!")
 
         msg = (
             #f'{utils.get_display_name(user)}'
             #f' | {event.edit_date} | '
+            f'{event.media.geo.lat},'
             f'{event.media.geo.long}'
-            f' | {event.media.geo.lat}'
             f' | accuracy radius: {event.media.geo.accuracy_radius if event.media.geo.accuracy_radius else ""}'
             ## Sometimes this is absent in the MessageMediaGeo
             #f' | heading: {event.media.heading if event.media.heading else ""}'
@@ -87,7 +87,7 @@ async def handler(event):
             )
  
         logger_log.info(msg)
-        await event.respond(msg)
+        #await event.respond(msg)
     else:
         logger_log.debug('No, not a geo object')
         logger_log.debug(f'event: {event}')

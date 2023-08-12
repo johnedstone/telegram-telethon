@@ -24,6 +24,7 @@ LOG_TO_FILE='no'
 ```
 
 #### location_app_bot
+* 2023-08-11: this is probably not being used.  Used at one time for development
 ```
 cd bots/
 pipenv shell
@@ -45,6 +46,7 @@ LOG_TO_FILE='no'
 ```
 
 #### location_to_restapi_app_bot
+* 2023-08-11: Currently in use
 ```
 cd bots/
 pipenv shell
