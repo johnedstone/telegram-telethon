@@ -1,25 +1,30 @@
 ---
-HOSTNAME: 'your_server_hostname'
-local_timezone: 'America/New_York'
+#HOSTNAME: "your_server_hostname"
+#local_timezone: "America/New_York"
 
-app_name: 'location_to_restapi_app'
-python_version: 'python3.7'
+app_name: "location_to_restapi_app"
+python_version: "python3"
 
-PATH_TO_PYTHON: '/opt/bitnami/apps/location_to_restapi_app/venv/bin/python'
-LIVE_APP_SCRIPT: 'location_to_restapi_app.py'
+PATH_TO_BOT_SCRIPT_SOURCE: "/path/to/source/bots"
+PATH_TO_BOT_SCRIPT_DEST: "/path/to/dest/bots"
+PATH_TO_PYTHON: "/path/to/dest/.venv/bin/python"
+LIVE_APP_SCRIPT: "location_to_restapi_app.py"
 
-TOKEN_LOCATION_BOT: 'token_for_location_app_bot'
-API_ID: 'api_id'
-API_HASH: 'api_hash'
-REST_API: 'rest_api_endpoint'
-REST_API_TOKEN: 'rest_api_token'
+TOKEN_LOCATION_BOT: "token_for_location_app_bot"
+API_ID: "api_id"
+API_HASH: "api_hash"
+REST_API: "rest_api_endpoint"
+REST_API_TOKEN: "rest_api_token"
 
 RSYNC_EXCLUDES:
-  - "--exclude Pip*"
-  - "--exclude Readme.md"
-  - "--exclude .env"
-  - "--exclude list_uptimes.py"
-  - "--exclude location_app.py"
-  - "--exclude telethon_utils.py"
+  - "--exclude=Pip*"
+  - "--exclude=Readme.md"
+  - "--exclude=.env"
+  - "--exclude=.venv"
+  - "--exclude=__pycache__"
+  - "--exclude=list_uptimes.py"
+  - "--exclude=location_app.py"
+  - "--exclude=telethon_utils.py"
+  - "--exclude=requirements.txt"
 
 # vim: ai et ts=2 sw=2 sts=2 nu

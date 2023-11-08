@@ -1,0 +1,4 @@
+# an alternative to Pipfile for local development
+Telethon
+requests
+python-dotenv

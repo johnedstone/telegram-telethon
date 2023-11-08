@@ -4,11 +4,11 @@ After=network.target
 
 [Service]
 Type=simple
-User=bitnami
-Group=bitnami
+User={{ USER }}
+Group={{ USER }}
 Restart=always
 
-ExecStart={{ PATH_TO_PYTHON }} /opt/bitnami/apps/{{ app_name }}/{{ LIVE_APP_SCRIPT }}
+ExecStart={{ PATH_TO_PYTHON }} {{ PATH_TO_BOT_SCRIPT_DEST }}/{{ LIVE_APP_SCRIPT }}
 
 [Install]
 WantedBy=multi-user.target

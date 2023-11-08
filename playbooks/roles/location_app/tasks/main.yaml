@@ -3,34 +3,34 @@
   become: yes
   file:
     path: "{{ item }}"
-    owner: bitnami
-    group: bitnami
+    owner: "{{ USER }}"
+    group: "{{ USER }}"
     mode: 0755
     state: directory
   loop:
     - "/var/log/{{ app_name }}"
-    - "/opt/bitnami/apps/{{ app_name }}"
+    - "{{ PATH_TO_BOT_SCRIPT_DEST }}"
 
 - name: Install requirements file
   copy:
     src: requirements.txt
-    dest: "/opt/bitnami/apps/{{ app_name }}/requirements.txt"
-    owner: bitnami
-    group: bitnami
+    dest: "{{ PATH_TO_BOT_SCRIPT_DEST }}/requirements.txt"
+    owner: "{{ USER }}"
+    group: "{{ USER }}"
 
 - name: Install specified python requirements
   pip:
-    requirements: "/opt/bitnami/apps/{{ app_name }}/requirements.txt"
-    virtualenv: "/opt/bitnami/apps/{{ app_name }}/venv"
+    requirements: "{{ PATH_TO_BOT_SCRIPT_DEST }}/requirements.txt"
+    virtualenv: "{{ PATH_TO_BOT_SCRIPT_DEST }}/.venv"
     virtualenv_command: "/usr/bin/virtualenv -p {{ python_version }}"
   when: not ansible_check_mode
 
 - name: Install environment variables
   template:
     src: env.j2
-    dest: "/opt/bitnami/apps/{{ app_name }}/.env"
-    owner: bitnami
-    group: bitnami
+    dest: "{{ PATH_TO_BOT_SCRIPT_DEST }}/.env"
+    owner: "{{ USER }}"
+    group: "{{ USER }}"
     mode: 0600
   notify:
     - "Restart {{ app_name }} app"
@@ -43,8 +43,8 @@
 
 - name: Rsync app files
   synchronize:
-    src: "{{ HOME }}/telegram-telethon/bots/"
-    dest: "/opt/bitnami/apps/{{ app_name }}/"
+    src: "{{ PATH_TO_BOT_SCRIPT_SOURCE }}/"
+    dest: "{{ PATH_TO_BOT_SCRIPT_DEST }}/"
     archive: no
     perms: yes
     checksum: yes
@@ -53,13 +53,7 @@
     owner: yes
     links: yes
     rsync_opts: "{{ RSYNC_EXCLUDES }}"
-    #      - "--exclude Pip*"
-    #  - "--exclude Readme.md"
-    #  - "--exclude .env"
-    #  - "--exclude list_uptimes.py"
-    #  - "--exclude location_to_restapi_app.py"
-    #  - "--exclude post_to_restapi.py"
-    #  - "--exclude telethon_utils_v2.py"
+
   notify:
     - "Restart {{ app_name }} app"
 

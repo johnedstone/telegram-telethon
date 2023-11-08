@@ -34,8 +34,7 @@ Same playbook as for the Location app (above), only the private_vars is differen
 
 ```
 export PATH_TO_PRIVATE_VARS_YAML=/path/to/the/location_to_restapi_app_private_vars.yaml
-
-#Use dry-run and play commands from above using the location_app_playbook
+ansible-playbook --check --flush-cache --diff -i inventory.ini location_to_restapi_bot_playbook.yaml
 
 ```
 
